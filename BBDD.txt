@@ -1,0 +1,67 @@
+CREATE DATABASE IF NOT EXISTS rentit_db;
+USE rentit_db; 
+
+CREATE TABLE Usuario (
+    usuarioID INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    contrasena VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Categoria (
+    categoriaID INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    descripcion TEXT
+);
+
+CREATE TABLE Material (
+    materialID INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(10,2) NOT NULL,
+    estado VARCHAR(255) NOT NULL,
+    categoriaID INT,
+    FOREIGN KEY (categoriaID) REFERENCES Categoria(categoriaID)
+);
+
+CREATE TABLE Alquiler (
+    alquilerID INT AUTO_INCREMENT PRIMARY KEY,
+    fechaInicio DATE NOT NULL,
+    fechaFin DATE NOT NULL,
+    monto DECIMAL(10,2) NOT NULL,
+    usuarioID INT,
+    materialID INT,
+    FOREIGN KEY (usuarioID) REFERENCES Usuario(usuarioID),
+    FOREIGN KEY (materialID) REFERENCES Material(materialID)
+);
+
+CREATE TABLE Pago (
+    pagoID INT AUTO_INCREMENT PRIMARY KEY,
+    monto DECIMAL(10,2) NOT NULL,
+    metodoPago VARCHAR(255) NOT NULL,
+    alquilerID INT,
+    FOREIGN KEY (alquilerID) REFERENCES Alquiler(alquilerID)
+);
+
+
+INSERT INTO Usuario (nombre, email, contrasena) VALUES
+('Carlos Ruiz', 'carlos.ruiz@example.com', 'contrasena789'),
+('Luisa Fernanda', 'luisa.fernanda@example.com', 'contrasena101112');
+
+INSERT INTO Categoria (nombre, descripcion) VALUES
+('Equipos de Elevación', 'Grúas y elevadores para construcción y mantenimiento'),
+('Vehículos de Construcción', 'Vehículos especializados para la construcción y transporte de materiales');
+
+INSERT INTO Material (nombre, descripcion, precio, estado, categoriaID) VALUES
+('Grúa Torre', 'Grúa de torre para construcción de altura', 150.00, 'Disponible', 1),
+('Camión Volteo', 'Camión para transporte de materiales grandes', 200.00, 'Disponible', 2);
+
+INSERT INTO Alquiler (fechaInicio, fechaFin, monto, usuarioID, materialID) VALUES
+('2023-03-01', '2023-03-15', 2250.00, 1, 1);
+
+INSERT INTO Pago (monto, metodoPago, alquilerID) VALUES
+(2250.00, 'Transferencia Bancaria', 1);
+
+
+
+
