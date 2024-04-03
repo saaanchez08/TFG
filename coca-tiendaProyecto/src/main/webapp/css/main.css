@@ -1,0 +1,290 @@
+/*=======================================*/
+/* Estilos de la pagina general principal*/
+/*=======================================*/
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: grey;
+}
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+}
+.container {
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  
+}
+
+h1 {
+  margin: 0;
+  border-style: double;
+  padding: 10px;
+}
+
+footer {
+  background-color: #333; /* Color de fondo del footer */
+  color: #fff; /* Color del texto del footer */
+  padding: 20px 0; /* Relleno superior e inferior del footer */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/*==================================================*/
+/* Estilos de los botones de la barra de navegacion */
+/*==================================================*/
+
+li {
+  padding: 10px;
+}
+
+.titulo {
+  padding: 10px 20px; /* Reducir el relleno vertical y aumentar el relleno horizontal */
+  margin: 0 10px; /* Agregar márgenes horizontalmente para separar los elementos */
+}
+
+.titulo2 {
+  padding: 10px 20px; /* Reducir el relleno vertical y aumentar el relleno horizontal */
+  margin: 0 10px; /* Agregar márgenes horizontalmente para separar los elementos */
+  background-color: green;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  margin: 0; /* Eliminar el margen exterior */
+  padding: 0; /* Eliminar el relleno exterior */
+}
+
+nav ul li {
+  position: relative;
+  transition: all 0.3s ease; /* Transición suave de los cambios */
+}
+
+nav ul li:hover {
+  background-color: #555; /* Cambio de color de fondo al pasar el ratón */
+  border-radius: 15px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px; /* Ajusta el relleno para hacer el área de interacción más grande */
+  display: block; /* Asegura que el área de interacción abarque todo el espacio del elemento del menú */
+  transition: all 0.2s ease; /* Transición suave de los cambios */
+}
+
+nav ul li ul {
+  text-align: center;
+  display: none;
+  position: absolute;
+  background-color: #333;
+  border-radius: 5px;
+  top: 100%; /* Ajustar la posición del submenú */
+  left: 0;
+  z-index: 1;
+}
+
+nav ul li ul li {
+  margin: 10px 0; /* Agregar espacio vertical entre elementos del submenú */
+}
+
+nav ul li ul li a:hover {
+  color: #4CAF50; /* Cambio de color del texto al pasar el ratón */
+}
+
+nav ul li:hover ul {
+  display: block;
+}
+
+
+/*=======================================*/
+/* Estilos de los efectos de los botones */
+/*=======================================*/
+
+.user-buttons button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/*=================================*/
+/* Estilos de los form de registro */
+/*=================================*/
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 25%;
+  border-radius: 10px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="submit"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  width: auto;
+}
+
+/*============================*/
+/* Estilos del video de fondo */
+/*============================*/
+
+#background-video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: 50%;
+  height: auto;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/*===========================================*/
+/* Estilos del sidevar  derecho de la pagina */
+/*===========================================*/
+
+
+.sidebar {
+  position: fixed;
+  top: 10;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  background-color: #4CAF50;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+
+}
+
+.content {
+  padding: 20px;
+  text-align: center;
+  width: 70%;
+  color: white;
+  background-color: black;
+  margin-left: 100px;
+  background-color: rgba(0, 0, 0, 0.4);
+  margin-top: 10px;
+}
+
+
+/*==================================*/
+/* Estilos del carrusel de imagnes  */
+/*==================================*/
+
+
