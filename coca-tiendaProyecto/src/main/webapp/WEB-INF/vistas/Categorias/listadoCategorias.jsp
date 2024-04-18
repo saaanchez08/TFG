@@ -6,13 +6,11 @@
    <%@ page isELIgnored="false"%>
 <html>
 <head>
-	 <link rel="stylesheet" href="/tienda/css/index.css">
-	 <link rel="stylesheet" href="/tienda/css/formularios.css">
-	 <link rel="stylesheet" href="/tienda/css/tablas.css">
+	
 </head>
 <body>
 <header>
-<h2>Panel de control Tienda de componentes informaticos</h2>
+<h2>CATEGORIAS</h2>
 </header>
 <%@include file="/menu.html" %>
 
@@ -27,12 +25,6 @@
 			<input type ="text" id="nombre" name="nombre">
 			<label for="descripcion">Descripcion Categoria</label>
 			<input type ="text" id="descripcion" name="descripcion">
-			
-			<br>
-			
-			<label for="activo">Activo</label>
-			<input type="checkbox" id="activo" name="activo">
-			<input type ="submit" value="Enviar">
 		
 		</form>
 	
@@ -54,7 +46,6 @@
 				<td> ${categoria.id} </td>
 				<td> ${categoria.nombre} </td>
 				<td> ${categoria.descripcion} </td>
-				<td> ${categoria.activo} </td>
 			</tr>
 		
 		</c:forEach>
