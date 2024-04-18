@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-  <header>
+<header>
     <div class="container">
         <h1>Rent.<span style="color: yellow">it</span></h1>
-        <nav>
+        <nav class="main-menu">
             <ul>
                 <li><a href="#" class="titulo">INICIO</a></li>
                 <li>
@@ -42,8 +42,12 @@
                 </li>
                 <li><a href="#" class="titulo">ACERCA DE</a></li>
                 <li><a href="#" class="titulo">CONTACTO</a></li>
-                <li><a href="#" class="titulo2">Registrarse</a></li>
-                <li><a href="#" class="titulo2">¿Ya tienes una cuenta?</a></li>
+            </ul>
+        </nav>
+        <nav class="auth-menu">
+            <ul>
+                <li><a href="#" class="titulo2 auth-link">Registrarse</a></li>
+                <li><a href="#" class="titulo2 auth-link">¿Ya tienes una cuenta?</a></li>
             </ul>
         </nav>
     </div>
@@ -51,28 +55,6 @@
 
 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv Barra lateral derecha vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
 
-<nav class="sidebar">
-    <h2>Menú de Navegación</h2>
-    <hr class="rounded">
-    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-        anim id est laborum."
-    </p>
-    <hr class="rounded">
-    <p>
-
-
-
-
-
-
-
-
-    </p>
-</nav>
 
 <!-- -------------------------------------------------------------------------------------- -->
 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv Pagina de bienvenida vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
@@ -86,63 +68,16 @@
 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvv Contenido central de la pagina vvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
 
 
-
-<div class="container">
-    <div class="content2">
-        <h2>Bienvenido a nuestra página de inicio</h2>
-        <p>Esta es una página web simple utilizando HTML, CSS y JavaScript.</p>
-    </div>
-</div>
-
-
-
-<!-- --------------------------------------------------------------------------------------- -->
-<!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv Carrusel de imagenes vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv --> 
-
-
-
 <!-- --------------------------------------------------------------------------------------- -->
 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvv Formulario de registro y login vvvvvvvvvvvvvvvvvvvvvvvvvvv -->
 
-    <!-- Ventana emergente de registro -->
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Registrarse</h2>
-            <form>
-              <label for="username">Nombre de usuario</label>
-              <input type="text" id="username" name="username" required><br><br>
-              <label for="email">Correo electrónico</label>
-              <input type="email" id="email" name="email" required><br><br>
-              <label for="password">Contraseña</label>
-              <input type="password" id="password" name="password" required><br><br>
-              <input type="submit"  value="Registrarse">
-            </form>
-        </div>
-    </div>
 
-    <!-- Ventana emergente de inicio de sesión -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Tu cuenta</h2>
-            <form>
-                <!-- Aquí puedes agregar los campos para el inicio de sesión -->
-                <label for="emailLogin">Correo electrónico</label>
-                <input type="email" id="emailLogin" name="emailLogin" required><br><br>
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" required><br><br>
-                <input type="submit" id="loginBtn" value="Entrar">
-            </form>
-        </div>
-    </div>
 
 <!-- ------------------------------------------------------------------------------- -->
 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv Video vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
 
     <video autoplay muted loop id="background-video">
-      <!-- <source src="video/pexels_videos_2073129 (2160p).mp4" type="video/mp4"> -->
-       
+      <!-- <source src="video/pexels_videos_2073129 (2160p).mp4" type="video/mp4"> -->      
     </video>
   
 <!-- -------------------------------------------------------------------------------- -->

@@ -2,26 +2,27 @@
 /* Estilos de la pagina general principal*/
 /*=======================================*/
 
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: grey;
 }
+
 header {
   background-color: #333;
   color: #fff;
   padding: 20px 0;
 }
+
 .container {
-  max-width: 1700px;
+  max-width: 90%;
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Ajusta el espacio entre los elementos */
   align-items: center;
-  color: white;
-  
 }
 
 h1 {
@@ -31,56 +32,87 @@ h1 {
 }
 
 footer {
-  background-color: #333; /* Color de fondo del footer */
-  color: #fff; /* Color del texto del footer */
-  padding: 20px 0; /* Relleno superior e inferior del footer */
+  background-color: #333; 
+  color: #fff; 
+  padding: 20px 0;
   position: fixed;
   bottom: 0;
   width: 100%;
 }
 
 /*==================================================*/
+/* Estilos de los botones de registro y login */
+/*==================================================*/
+
+.main-menu ul,
+.auth-menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.main-menu ul li,
+.auth-menu ul li {
+  display: inline; /* Los elementos se mostrarán en línea */
+}
+
+.main-menu .titulo,
+.auth-menu .titulo2 {
+  padding: 10px 20px;
+  margin-right: 20px; /* Agrega margen a la derecha para separar los elementos */
+}
+
+.auth-menu {
+  text-align: right; /* Alinea el menú de autenticación a la derecha */
+}
+
+/* Estilos para el menú de autenticación */
+.auth-menu .auth-link {
+  background-color: #4CAF50; /* Color de fondo */
+  color: white; /* Color del texto */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 8px 16px; /* Espaciado interno */
+  text-decoration: none; /* Quitar subrayado de enlaces */
+}
+
+.auth-menu .auth-link:hover {
+  background-color: #45a049; /* Cambio de color al pasar el ratón */
+}
+
+
+/*==================================================*/
 /* Estilos de los botones de la barra de navegacion */
 /*==================================================*/
 
-li {
-  padding: 10px;
-}
-
-.titulo {
-  padding: 10px 20px; /* Reducir el relleno vertical y aumentar el relleno horizontal */
-  margin: 0 10px; /* Agregar márgenes horizontalmente para separar los elementos */
-}
-
+.titulo,
 .titulo2 {
-  padding: 10px 20px; /* Reducir el relleno vertical y aumentar el relleno horizontal */
-  margin: 0 10px; /* Agregar márgenes horizontalmente para separar los elementos */
-  background-color: green;
+  padding: 10px 20px;
+  margin: 0 10px;
 }
 
 nav ul {
   list-style-type: none;
   display: flex;
-  margin: 0; /* Eliminar el margen exterior */
-  padding: 0; /* Eliminar el relleno exterior */
+  margin: 0;
+  padding: 0;
 }
 
 nav ul li {
   position: relative;
-  transition: all 0.3s ease; /* Transición suave de los cambios */
+  transition: all 0.3s ease;
 }
 
-nav ul li:hover {
-  background-color: #555; /* Cambio de color de fondo al pasar el ratón */
+nav ul .titulo:hover {
+  background-color: #555;
   border-radius: 15px;
 }
 
 nav ul li a {
   color: #fff;
   text-decoration: none;
-  padding: 10px 20px; /* Ajusta el relleno para hacer el área de interacción más grande */
-  display: block; /* Asegura que el área de interacción abarque todo el espacio del elemento del menú */
-  transition: all 0.2s ease; /* Transición suave de los cambios */
+  padding: 10px 20px;
+  display: block;
+  transition: all 0.2s ease;
 }
 
 nav ul li ul {
@@ -89,17 +121,17 @@ nav ul li ul {
   position: absolute;
   background-color: #333;
   border-radius: 5px;
-  top: 100%; /* Ajustar la posición del submenú */
+  top: 100%;
   left: 0;
   z-index: 1;
 }
 
 nav ul li ul li {
-  margin: 10px 0; /* Agregar espacio vertical entre elementos del submenú */
+  margin: 10px 0;
 }
 
 nav ul li ul li a:hover {
-  color: #4CAF50; /* Cambio de color del texto al pasar el ratón */
+  color: #4caf50;
 }
 
 nav ul li:hover ul {
@@ -160,78 +192,6 @@ nav ul li:hover ul {
 }
 
 
-/*=================================*/
-/* Estilos de los form de registro */
-/*=================================*/
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.4);
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 25%;
-  border-radius: 10px;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  margin-bottom: 10px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="submit"] {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  font-size: 14px;
-}
-
-input[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin-top: 10px;
-  cursor: pointer;
-  border-radius: 3px;
-  width: auto;
-}
-
 /*============================*/
 /* Estilos del video de fondo */
 /*============================*/
@@ -249,42 +209,42 @@ input[type="submit"] {
 }
 
 /*===========================================*/
-/* Estilos del sidevar  derecho de la pagina */
+/* Estilos del menu de welcome de la pagina */
 /*===========================================*/
-
-
-.sidebar {
-  position: fixed;
-  top: 10;
-  right: 0;
-  width: 300px;
-  height: 100%;
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-  background-color: #4CAF50;
-}
-
-.sidebar h2 {
-  margin-top: 0;
-
-}
 
 .content {
   padding: 20px;
   text-align: center;
-  width: 70%;
   color: white;
-  background-color: black;
-  margin-left: 100px;
   background-color: rgba(0, 0, 0, 0.4);
-  margin-top: 10px;
+  margin: 100px auto 0;
+  width: 70%; 
 }
 
+/*==========================================*/
+/* Estilos para el responsive de la pagina  */
+/*==========================================*/
 
-/*==================================*/
-/* Estilos del carrusel de imagnes  */
-/*==================================*/
+/* Estilos para dispositivos pequeños */
+@media only screen and (max-width: 1200px) {
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
+  nav ul li {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  nav ul li ul {
+    position: static; /* Cambiado a position: static para que aparezcan correctamente */
+    display: none;
+  }
+
+  nav ul li:hover ul {
+    display: none; /* Cambiado a display: none para que aparezcan correctamente */
+  }
+}
 
