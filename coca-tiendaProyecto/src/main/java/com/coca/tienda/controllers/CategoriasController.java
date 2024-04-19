@@ -19,12 +19,13 @@ import com.coca.tienda.negocio.ICategoriasService;
 @Controller
 @RequestMapping("/categorias/")
 public class CategoriasController {
+	
 	@Autowired
 	ICategoriasService categoriasService;
 
 	@GetMapping("listarcategorias")
 	public String getListadoCategorias() {
-		return "listadoCategorias";
+		return "/Categorias/listadoCategorias";
 	}
 
 	@PostMapping("listarcategorias")
@@ -36,7 +37,7 @@ public class CategoriasController {
 
 		model.addAttribute("lista", listaCategorias);
 
-		return "listadoCategorias";
+		return "/Categoria/listadoCategorias";
 
 	}
 }

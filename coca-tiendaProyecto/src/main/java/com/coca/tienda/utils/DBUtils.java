@@ -30,9 +30,9 @@ public class DBUtils {
 
 	public static Connection conectaBBDD() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		String urlDB = "jdbc:mysql://localhost:3306/renit_db?serverTimezone=UTC";
+		String urlDB = "jdbc:mysql://localhost:3306/rentit_db?serverTimezone=UTC";
 		String user = "root";
-		String pass = "PracticaRoot";
+		String pass = "root";
 		Connection connection = DriverManager.getConnection(urlDB, user, pass);
 		logger.info("Establecida la conexión a la BBDD");
 		return connection;

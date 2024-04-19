@@ -6,11 +6,13 @@ import java.util.List;
 import javax.naming.NamingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.coca.tienda.dao.CategoriasDAO;
 import com.coca.tienda.dtos.CategoriaDTO;
 import com.coca.tienda.negocio.ICategoriasService;
 
+@Component
 public class CategoriasService implements ICategoriasService {
 
 	@Autowired

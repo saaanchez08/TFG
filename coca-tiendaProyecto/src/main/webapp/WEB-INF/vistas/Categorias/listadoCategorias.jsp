@@ -6,13 +6,13 @@
    <%@ page isELIgnored="false"%>
 <html>
 <head>
-	
+	<link rel="stylesheet" href="/tienda/css/main.css">
+    <title>Gestión de Tienda - Modificación de Categorías</title>
 </head>
 <body>
 <header>
-<h2>CATEGORIAS</h2>
 </header>
-<%@include file="/menu.html" %>
+<%@include file="../menu.html" %>
 
 <h2>Listar Categorias</h2>
 
@@ -21,14 +21,15 @@
 		<form action="http://localhost:8080/tienda/categorias/listarcategorias" method ="POST">
 			<label for="id"> ID Categoria</label>
 			<input type ="text" id="id" name="id">
+			
 			<label for="nombre"> Nombre Categoria</label>
 			<input type ="text" id="nombre" name="nombre">
+			
 			<label for="descripcion">Descripcion Categoria</label>
 			<input type ="text" id="descripcion" name="descripcion">
-		
+			
+			<input type="submit" value="Enviar">
 		</form>
-	
-	
 	</div>
 
 <c:if test="${not empty lista }">
@@ -37,7 +38,6 @@
 			<th>ID</th>
 			<th>NOMBRE </th>
 			<th>DESCRIPCION </th>
-			<th>ACTIVO </th>
 		</tr>
 		
 		<c:forEach items="${lista}" var="categoria">
