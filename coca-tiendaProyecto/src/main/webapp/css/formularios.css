@@ -1,0 +1,78 @@
+/* Estilo para todos los inputs y selects */
+input {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* Estilo para el contenedor del formulario */
+.form {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+/* Estilo para campos ocultos */
+.hidden {
+  display: none;
+}
+
+/* Agrega estos estilos para los select */
+select {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+  appearance: none; /* Elimina las flechas predeterminadas en algunos navegadores */
+  background-color: #fff; /* Fondo blanco para el dropdown */
+  background-image: linear-gradient(45deg, transparent 50%, #555 50%), linear-gradient(135deg, #555 50%, transparent 50%); /* Agrega un fondo con estilo de gradiente */
+  background-size: 14px 14px; /* Tamaño del patrón del gradiente */
+  background-position: calc(100% - 20px) center; /* Ajusta la posición del patrón y la flecha */
+  background-repeat: no-repeat;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  padding-right: 30px; /* Ajusta el espacio para la flecha */
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s; /* Agrega transiciones suaves */
+}
+
+/* Estilo cuando el dropdown está enfocado */
+select:focus {
+  border-color: #007bff; /* Cambia el color del borde al enfocar */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Agrega una sombra al enfocar */
+}
+
+/* Estilo para las opciones del select */
+select option {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Estilo para las opciones cuando el select está abierto */
+select option:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Estilos para el mensaje de confirmación */
+.confirmacion {
+    text-align: center;
+    color: #28a745; /* Un color que indique éxito */
+    font-size: 1.1em;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #f4f4f4; /* Un fondo sutil */
+    margin-top: -10px; /* Ajusta según sea necesario para que se vea como parte del formulario */
+}
+

@@ -10,6 +10,5 @@ import com.coca.tienda.dtos.CategoriaDTO;
 public interface CategoriasDAO {
 	public List<CategoriaDTO> obtenerTodosCategorias() throws ClassNotFoundException, SQLException, NamingException;
 
-	public List<CategoriaDTO> buscarCategoria(String id, String nombre, String descripcion)
-			throws ClassNotFoundException, SQLException, NamingException;
+	public List<CategoriaDTO> buscarCategoria(String id, String nombre, String descripcion) throws ClassNotFoundException, SQLException, NamingException;
 }

@@ -7,18 +7,20 @@
 <html>
 <head>
 	<link rel="stylesheet" href="/tienda/css/main.css">
-    <title>Gestión de Tienda - Modificación de Categorías</title>
+	<link rel="stylesheet" href="/tienda/css/formularios.css">
+    <link rel="stylesheet" href="/tienda/css/tablas.css">
 </head>
 <body>
 <header>
 </header>
 <%@include file="../menu.html" %>
 
-<h2>Listar Categorias</h2>
+
 
 <div class="container">
 	<div class= "form">
-		<form action="http://localhost:8080/tienda/categorias/listarcategorias" method ="POST">
+	<h2>Listar Categorias</h2>
+		<form class="form-categoria" action="http://localhost:8080/tienda/categorias/listarcategorias" method ="POST">
 			<label for="id"> ID Categoria</label>
 			<input type ="text" id="id" name="id">
 			
@@ -30,28 +32,25 @@
 			
 			<input type="submit" value="Enviar">
 		</form>
+		<c:if test="${not empty lista }">
+			<table class="tabla-categoria">
+				<tr>
+					<th>NOMBRE </th>
+				</tr>
+				
+				<c:forEach items="${lista}" var="categoria">
+				
+					<tr>
+						<td> ${categoria.nombre} </td>
+					</tr>
+				
+				</c:forEach>
+			
+			</table>
+		</c:if>
 	</div>
 
-<c:if test="${not empty lista }">
-	<table>
-		<tr>
-			<th>ID</th>
-			<th>NOMBRE </th>
-			<th>DESCRIPCION </th>
-		</tr>
-		
-		<c:forEach items="${lista}" var="categoria">
-		
-			<tr>
-				<td> ${categoria.id} </td>
-				<td> ${categoria.nombre} </td>
-				<td> ${categoria.descripcion} </td>
-			</tr>
-		
-		</c:forEach>
-	
-	</table>
-</c:if>
+
 
 </div>
 

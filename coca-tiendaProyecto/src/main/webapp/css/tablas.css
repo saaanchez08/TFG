@@ -1,0 +1,62 @@
+/* Estilos específicos para el formulario de categorías */
+.form-categoria {
+    background-color: #fff; /* Color de fondo */
+    padding: 20px; /* Espaciado interior */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para resaltar */
+    margin-bottom: 30px; /* Espacio debajo del formulario */
+}
+
+.form-categoria label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.form-categoria input[type="text"],
+.form-categoria input[type="submit"] {
+    width: calc(100% - 20px); /* Se ajusta al ancho del formulario menos el padding */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-categoria input[type="submit"] {
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.form-categoria input[type="submit"]:hover {
+    background-color: #444;
+}
+
+/* Estilos específicos para la tabla de categorías */
+.tabla-categoria {
+    background-color: #fff; /* Fondo blanco para la tabla */
+    border-collapse: collapse;
+    width: 100%; /* Ancho completo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra consistente con el formulario */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Asegura que la sombra y el borde se apliquen bien */
+}
+
+.tabla-categoria th,
+.tabla-categoria td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.tabla-categoria th {
+    background-color: #f5f5f5;
+}
+
+.tabla-categoria tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Resetea los estilos si se han aplicado globalmente */
+.container, .container * {
+    box-sizing: content-box;
+}
