@@ -19,25 +19,30 @@ import com.coca.tienda.negocio.ICategoriasService;
 @Controller
 @RequestMapping("/categorias/")
 public class CategoriasController {
-	
-	@Autowired
-	ICategoriasService categoriasService;
+    @Autowired
+    ICategoriasService categoriasService;
 
-	@GetMapping("listarcategorias")
-	public String getListadoCategorias() {
-		return "/Categorias/listadoCategorias";
-	}
+    @GetMapping("listarcategorias")
+    public String getListadoCategorias() {
+        return "/Categorias/listadoCategorias";
+    }
 
-	@PostMapping("listarcategorias")
-	public String buscarCategoria(@RequestParam("id") String id, @RequestParam("nombre") String nombre,
-			@RequestParam("descripcion") String descripcion, ModelMap model)
-			throws ClassNotFoundException, SQLException, NamingException {
+    @PostMapping("listarcategorias")
+    public String buscarCategoria(@RequestParam(value = "id", required = false) String id, 
+                                  @RequestParam("nombre") String nombre,
+                                  @RequestParam("descripcion") String descripcion, 
+                                  ModelMap model)
+            throws ClassNotFoundException, SQLException, NamingException {
 
-		List<CategoriaDTO> listaCategorias = categoriasService.buscarCategoria(id, nombre, descripcion);
+        List<CategoriaDTO> listaCategorias;
 
-		model.addAttribute("lista", listaCategorias);
+        if (id != null && !id.isEmpty()) {
+            listaCategorias = categoriasService.buscarCategoria(id, nombre, descripcion);
+        } else {
+            listaCategorias = categoriasService.buscarCategoria("", nombre, descripcion);
+        }
 
-		return "/Categorias/listadoCategorias";
+        model.addAttribute("lista", listaCategorias);
 
-	}
-}
+        return "/Categorias/listadoCategorias";
+    }}

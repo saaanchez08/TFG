@@ -1,0 +1,14 @@
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\controllers\UsuariosController.java
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\negocio\IUsuariosService.java
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\dtos\CategoriaDTO.java
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\utils\DBUtils.java
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\dtos\UsuarioDTO.java
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\dao\jdbcimpl\UsuariosDAOImplJdbc.java
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\negocio\impl\CategoriasService.java
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\CocaTiendaProyectoApplication.java
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\dao\UsuariosDAO.java
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\dao\CategoriasDAO.java
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\controllers\CategoriasController.java
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\dao\jdbcimpl\CategoriasDAOImplJdbc.java
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\negocio\ICategoriasService.java
+C:\Users\Usuario\Desktop\TFG\coca-tiendaProyecto\src\main\java\com\coca\tienda\negocio\impl\UsuariosService.java

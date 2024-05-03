@@ -30,18 +30,22 @@
 			<label for="descripcion">Descripcion Categoria</label>
 			<input type ="text" id="descripcion" name="descripcion">
 			
-			<input type="submit" value="Enviar">
+			<input type="submit" value="Listar Todas Nuestras Categorias">
 		</form>
 		<c:if test="${not empty lista }">
 			<table class="tabla-categoria">
 				<tr>
 					<th>NOMBRE </th>
+					<th>DESCRIPCION</th>
+					
 				</tr>
 				
 				<c:forEach items="${lista}" var="categoria">
 				
 					<tr>
 						<td> ${categoria.nombre} </td>
+						<td> ${categoria.descripcion} </td>
+						
 					</tr>
 				
 				</c:forEach>
