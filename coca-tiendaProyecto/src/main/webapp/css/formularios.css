@@ -1,3 +1,4 @@
+@charset "ISO-8859-1";
 /* Estilo para todos los inputs y selects */
 input {
   width: 90%;
@@ -11,6 +12,7 @@ input {
 
 /* Estilo para el contenedor del formulario */
 .form {
+  margin-top: 13%;
   max-width: 500px;
   margin: 20px auto;
   padding: 20px;
@@ -35,8 +37,8 @@ select {
   appearance: none; /* Elimina las flechas predeterminadas en algunos navegadores */
   background-color: #fff; /* Fondo blanco para el dropdown */
   background-image: linear-gradient(45deg, transparent 50%, #555 50%), linear-gradient(135deg, #555 50%, transparent 50%); /* Agrega un fondo con estilo de gradiente */
-  background-size: 14px 14px; /* Tama√±o del patr√≥n del gradiente */
-  background-position: calc(100% - 20px) center; /* Ajusta la posici√≥n del patr√≥n y la flecha */
+  background-size: 14px 14px; /* TamaÒo del patrÛn del gradiente */
+  background-position: calc(100% - 20px) center; /* Ajusta la posiciÛn del patrÛn y la flecha */
   background-repeat: no-repeat;
   cursor: pointer;
   border: 1px solid #ccc;
@@ -47,7 +49,7 @@ select {
   transition: border-color 0.3s, box-shadow 0.3s; /* Agrega transiciones suaves */
 }
 
-/* Estilo cuando el dropdown est√° enfocado */
+/* Estilo cuando el dropdown est· enfocado */
 select:focus {
   border-color: #007bff; /* Cambia el color del borde al enfocar */
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Agrega una sombra al enfocar */
@@ -59,20 +61,20 @@ select option {
   color: #333;
 }
 
-/* Estilo para las opciones cuando el select est√° abierto */
+/* Estilo para las opciones cuando el select est· abierto */
 select option:hover {
   background-color: #007bff;
   color: #fff;
 }
 
-/* Estilos para el mensaje de confirmaci√≥n */
+/* Estilos para el mensaje de confirmaciÛn */
 .confirmacion {
     text-align: center;
-    color: #28a745; /* Un color que indique √©xito */
+    color: #28a745; /* Un color que indique Èxito */
     font-size: 1.1em;
     padding: 10px;
     border-radius: 4px;
     background-color: #f4f4f4; /* Un fondo sutil */
-    margin-top: -10px; /* Ajusta seg√∫n sea necesario para que se vea como parte del formulario */
+    margin-top: -10px; /* Ajusta seg˙n sea necesario para que se vea como parte del formulario */
 }
 

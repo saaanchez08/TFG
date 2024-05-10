@@ -53,9 +53,6 @@
 			</table>
 		</c:if>
 	</div>
-
-
-
 </div>
 
 

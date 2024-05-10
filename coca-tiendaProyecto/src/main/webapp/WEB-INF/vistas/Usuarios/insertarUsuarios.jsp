@@ -32,9 +32,6 @@
 				<p class="confirmacion">Usuario insertado correctamente</p>
 			</c:if>
         </div>
-
-       
-
     </div>
 </body>
 </html>

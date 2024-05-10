@@ -1,4 +1,5 @@
-/* Estilos especÃ­ficos para el formulario de categorÃ­as */
+@charset "ISO-8859-1";
+/* Estilos específicos para el formulario de categorías */
 .form-categoria {
     background-color: #fff; /* Color de fondo */
     padding: 20px; /* Espaciado interior */
@@ -32,7 +33,7 @@
     background-color: #444;
 }
 
-/* Estilos especÃ­ficos para la tabla de categorÃ­as */
+/* Estilos específicos para la tabla de categorías */
 .tabla-categoria {
     background-color: #fff; /* Fondo blanco para la tabla */
     border-collapse: collapse;

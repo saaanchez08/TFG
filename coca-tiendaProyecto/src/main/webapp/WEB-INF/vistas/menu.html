@@ -4,20 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RENTIT</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/code.js" defer></script>
 </head>
 <body>
+
+<div id="load">
+  <div>G</div>
+  <div>N</div>
+  <div>I</div>
+  <div>D</div>
+  <div>A</div>
+  <div>O</div>
+  <div>L</div>
+</div>
+
 <header>
     <div class="container">
         <h1>Rent.<span style="color: yellow">it</span></h1>
         <nav class="main-menu">
             <ul>
-                <li><a href="#" class="titulo">INICIO</a></li>
+                <li><a href="http://localhost:8080/tienda/" class="titulo">INICIO</a></li>
                 <li>
                     <a href="http://localhost:8080/tienda/alquiler/realizaralquiler" class="titulo">ALQUILER MAQUINARIA</a>
                     <ul>
-                        <li><a href="#">Equipos de Elevación</a></li>
-                        <li><a href="#">Vehículos de Construcción</a></li>
+                        <li><a href="#">Equipos de Elevacion</a></li>
+                        <li><a href="#">Vehiculos de Construccion</a></li>
                         <li><a href="#">Manipuladores</a></li>
                         <li><a href="#">Mas +</a></li>
                     </ul>
@@ -41,7 +53,6 @@
         <nav class="auth-menu">
             <ul>
                 <li><a href="http://localhost:8080/tienda/usuarios/insertarusuario" class="titulo2 auth-link">Registrarse</a></li>
-                <li><a href="#" class="titulo2 auth-link">¿Ya tienes una cuenta?</a></li>
             </ul>
         </nav>
     </div>
@@ -53,11 +64,10 @@
 <!-- -------------------------------------------------------------------------------------- -->
 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv Pagina de bienvenida vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
 
-<div class="content">
+<div class="content" id="welcome-message">
     <h1>Bienvenido a Rent.it</h1>
     <h2>"Construye tus sueños paso a paso. ¡Tu proyecto, nuestra herramienta!"</h2>
 </div>
-
 <!-- --------------------------------------------------------------------------------------- -->
 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvv Contenido central de la pagina vvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
 
@@ -71,21 +81,44 @@
 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv Video vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
 
     <video autoplay muted loop id="background-video">
-      <!-- <source src="video/pexels_videos_2073129 (2160p).mp4" type="video/mp4"> -->      
+      	<source src="media/constraccion1.mp4" type="video/mp4">     
     </video>
   
 <!-- -------------------------------------------------------------------------------- -->
 <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv Footer vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
 
-   <!--   <footer>
+   	<footer>
         <div class="container">
             <p>Derechos de autor © 2024 - Todos los derechos reservados</p>
         </div>
-    </footer>-->
+    </footer>
 
 <!-- --------------------------------------------------------------------------------- -->
 
-
-    <script src="code.js"></script>
+	<script>
+	  // Obtener la URL actual
+	 var currentUrl = window.location.href;
+	
+	  // Verificar si la URL actual es la página principal
+	  if (currentUrl === "http://localhost:8080/tienda/") {
+	    // Mostrar el mensaje de bienvenida
+	    document.getElementById("welcome-message").style.display = "block";
+	  } else {
+	    // Ocultar el mensaje de bienvenida
+	    document.getElementById("welcome-message").style.display = "none";
+	  }
+	</script>
+	
+    <script> 
+	    // Verificar si la URL actual es la página principal
+	    if (window.location.href === 'http://localhost:8080/tienda/') {
+	        // Mostrar la animación de carga
+	        document.getElementById('load').style.display = 'block';
+	    } else {
+	        // Ocultar la animación de carga en otras páginas
+	        document.getElementById('load').style.display = 'none';
+	    }
+	</script>
+	
 </body>
 </html>

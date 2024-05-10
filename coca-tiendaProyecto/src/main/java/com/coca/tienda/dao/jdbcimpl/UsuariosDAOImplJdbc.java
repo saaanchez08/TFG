@@ -4,16 +4,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import javax.naming.NamingException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.coca.tienda.dao.UsuariosDAO;
+import com.coca.tienda.dtos.ComboDTO;
 import com.coca.tienda.utils.DBUtils;
 
 @Component
 public class UsuariosDAOImplJdbc implements UsuariosDAO{
+	
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public Integer insertarUsuarios(String nombre, String email, String contrasena) throws ClassNotFoundException, SQLException, NamingException {
@@ -32,5 +39,4 @@ public class UsuariosDAOImplJdbc implements UsuariosDAO{
 	    return resultado;
 	    
 	}
-
 }

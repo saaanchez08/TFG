@@ -5,7 +5,6 @@
 <html>
 <head>
 	 <link rel="stylesheet" href="css/main.css">
-	 <link href="js/code.js">
 </head>
 <body>
 <header>
