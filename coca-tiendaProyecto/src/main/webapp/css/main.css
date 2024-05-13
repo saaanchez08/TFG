@@ -1,6 +1,6 @@
 @charset "ISO-8859-1";
-/*=======================================*/
-/* Estilos de la pagina general principal*/
+  /*=======================================*/
+ /* Estilos de la pagina general principal*/
 /*=======================================*/
 
 body {
@@ -44,9 +44,14 @@ footer {
   width: 100%;
 }
 
-/*==================================================*/
-/* Estilos de los botones de registro y login */
-/*==================================================*/
+footer .container{
+	width:50%;
+	
+}
+
+  /*============================================*/
+ /* Estilos de los botones de registro y login */
+/*============================================*/
 
 .main-menu ul,
 .auth-menu ul {
@@ -82,9 +87,8 @@ footer {
   background-color: #45a049;
 }
 
-
-/*==================================================*/
-/* Estilos de los botones de la barra de navegacion */
+  /*==================================================*/
+ /* Estilos de los botones de la barra de navegacion */
 /*==================================================*/
 
 .titulo,
@@ -141,8 +145,8 @@ nav ul li:hover ul {
   display: block;
 }
 
-/*=======================================*/
-/* Estilos de los efectos de los botones */
+  /*=======================================*/
+ /* Estilos de los efectos de los botones */
 /*=======================================*/
 
 .user-buttons button {
@@ -193,9 +197,8 @@ nav ul li:hover ul {
   cursor: pointer;
 }
 
-
-/*============================*/
-/* Estilos del video de fondo */
+  /*============================*/
+ /* Estilos del video de fondo */
 /*============================*/
 
 #background-video {
@@ -210,8 +213,8 @@ nav ul li:hover ul {
   overflow: hidden;
 }
 
-/*===========================================*/
-/* Estilos del menu de welcome de la pagina */
+  /*===========================================*/
+ /* Estilos del menu de welcome de la pagina */
 /*===========================================*/
 
 .content {
@@ -223,11 +226,69 @@ nav ul li:hover ul {
   width: 70%; 
 }
 
-/*==========================================*/
-/* Estilos para el responsive de la pagina  */
+  /*====================================*/
+ /* Estilos para el boton de registro  */
+/*====================================*/
+
+.cssbuttons-io-button {
+  background: #aaa;
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em #FEE715;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+  cursor: pointer;
+}
+
+.cssbuttons-io-button .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #FEE715;
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: #7b52b9;
+}
+
+.cssbuttons-io-button:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon {
+  transform: scale(0.95);
+}
+
+
+  /*==========================================*/
+ /* Estilos para el responsive de la pagina  */
 /*==========================================*/
 
-/* Estilos para dispositivos pequeños */
 @media only screen and (max-width: 1200px) {
 
 	  nav ul {
@@ -283,7 +344,124 @@ nav ul li:hover ul {
 	
 }
 
-/* Estilos de la animación de carga */
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+.fa-reddit {
+  background: #ff5700;
+  color: white;
+}
+
+  /*===============================================*/
+ /* Estilos para el POPUP de contacto y acerca de */
+/*===============================================*/
+
+.popup {
+    display: none; /* Inicialmente oculto */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 9999;
+    max-width: 80%; /* Ancho máximo */
+    border: 2px solid #007bff; /* Borde del popup */
+    border-radius: 10px; /* Borde redondeado */
+}
+
+.popup-content {
+    text-align: center;
+    
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #555;
+}
+
+.overlay {
+    display: none; /* Inicialmente oculto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    z-index: 9998; /* Por debajo del PopUp */
+}
+
+
+
+  /*===============================================*/
+ /* Estilos para el POPUP de contacto y acerca de */
+/*===============================================*/
+   
+
+.offer-container {
+    width: 100%;
+    background-color: #333;
+    overflow: hidden;
+    padding: 20px 0; /* Añadir espacio alrededor del texto */
+    border-top: 2px solid #FEE715; /* Borde superior con color azul */
+    border-bottom: 2px solid #FEE715; /* Borde inferior con color azul */
+}
+
+.offer-text {
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+    animation: scrollText 20s linear infinite; /* Animación de desplazamiento */
+    font-size: 24px; /* Aumentar el tamaño de la letra */
+    color: white; /* Color del texto */
+    font-family: Arial, sans-serif; /* Fuente del texto */
+}
+
+@keyframes scrollText {
+    0% { transform: translateX(-100%); } /* Empieza fuera del contenedor */
+    100% { transform: translateX(100%); } /* Termina fuera del contenedor en el lado opuesto */
+}
+
+
+  /*==================================*/
+ /* Estilos de la animación de carga */
+/*==================================*/
+
+
 #load {
   position: fixed;
   top: 0;
