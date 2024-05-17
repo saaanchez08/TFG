@@ -35,6 +35,7 @@
 		<c:if test="${not empty lista }">
 			<table class="tabla-categoria">
 				<tr>
+					<th>ID</th>
 					<th>NOMBRE </th>
 					<th>DESCRIPCION</th>
 					
@@ -43,6 +44,7 @@
 				<c:forEach items="${lista}" var="categoria">
 				
 					<tr>
+						<td> ${categoria.id} </td>
 						<td> ${categoria.nombre} </td>
 						<td> ${categoria.descripcion} </td>
 						

@@ -18,7 +18,10 @@ public class AlquilerDAOImplJdbc implements AlquilerDAO {
             Integer usuarioID, Integer materialId) throws ClassNotFoundException, SQLException {
 
         String sql = "INSERT INTO alquiler (fechaInicio, fechaFin, monto, usuarioID, materialID) VALUES (?, ?, ?, ?, ?);";
-     
+
+;
+
+       
         	Connection connection = DBUtils.conectaBBDD();
     	    PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -31,6 +34,8 @@ public class AlquilerDAOImplJdbc implements AlquilerDAO {
     	    Integer resultado = ps.executeUpdate();
 
     	    connection.close();
+
+        
 
         return resultado;
     }
