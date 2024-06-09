@@ -9,14 +9,14 @@ import jakarta.persistence.Id;
 public class MaterialDTO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String materialID;
+    private Long materialID;
     private String nombre;
     private String descripcion;
     private Double precio;
     private String estado;
-    private String categoriaID;
+    private Long categoriaID;
     
-	public MaterialDTO(String materialID, String nombre, String descripcion, Double precio, String estado, String categoriaID) {
+	public MaterialDTO(Long materialID, String nombre, String descripcion, Double precio, String estado, Long categoriaID) {
 		super();
 		this.materialID = materialID;
 		this.nombre = nombre;
@@ -28,10 +28,10 @@ public class MaterialDTO {
 	
 	
 	
-	public String getMaterialID() {
+	public Long getMaterialID() {
 		return materialID;
 	}
-	public void setMaterialID(String materialID) {
+	public void setMaterialID(Long materialID) {
 		this.materialID = materialID;
 	}
 	public String getNombre() {
@@ -58,10 +58,10 @@ public class MaterialDTO {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public String getCategoriaID() {
+	public Long getCategoriaID() {
 		return categoriaID;
 	}
-	public void setCategoriaID(String categoriaID) {
+	public void setCategoriaID(Long categoriaID) {
 		this.categoriaID = categoriaID;
 	}
 
