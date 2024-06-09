@@ -16,9 +16,4 @@
   }
   </script>
   
-  <style scoped>
-  .categorias {
-    padding: 20px;
-  }
-  </style>
   

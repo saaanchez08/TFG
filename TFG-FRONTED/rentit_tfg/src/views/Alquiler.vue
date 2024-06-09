@@ -15,10 +15,5 @@
     }
   }
   </script>
-  
-  <style scoped>
-  .alquiler {
-    padding: 20px;
-  }
-  </style>
+
   
