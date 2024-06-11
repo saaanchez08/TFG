@@ -5,8 +5,7 @@ public class AlquilerDTO {
     private Integer alquilerId;
     private String fechaInicio;
     private String fechaFin;
-    private Double monto;
-    private Integer usuarioId;
+    private Double precio;
     private Integer materialId;
 
 
@@ -34,20 +33,12 @@ public class AlquilerDTO {
         this.fechaFin = fechaFin;
     }
 
-    public double getMonto() {
-        return monto;
+    public double getPrecio() {
+        return precio;
     }
 
-    public void setMonto(double monto) {
-        this.monto = monto;
-    }
-
-    public int getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setMonto(double precio) {
+        this.precio = precio;
     }
 
     public int getMaterialId() {

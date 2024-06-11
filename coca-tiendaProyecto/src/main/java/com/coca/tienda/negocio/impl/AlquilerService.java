@@ -17,9 +17,9 @@ public class AlquilerService implements IAlquilerService{
 	AlquilerDAO alquilerDAO;
 	
 	@Override
-	public Integer realizarAlquiler(Integer alquilerId, String fechaInicio, String fechaFin, Double monto, Integer usuarioID, Integer materialId) throws ClassNotFoundException, SQLException, NamingException {
+	public Integer realizarAlquiler(Integer alquilerId, String fechaInicio, String fechaFin, Double precio, Integer materialId) throws ClassNotFoundException, SQLException, NamingException {
 		
-		return alquilerDAO.realizarAlquiler(alquilerId, fechaInicio, fechaFin, monto, usuarioID, materialId);
+		return alquilerDAO.realizarAlquiler(alquilerId, fechaInicio, fechaFin, precio, materialId);
 	}
 
 }

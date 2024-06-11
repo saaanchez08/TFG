@@ -31,13 +31,12 @@ public class AlquilerController {
             @RequestParam(value = "alquilerID", required = false) Integer alquilerId,
             @RequestParam("fechaInicio") String fechaInicio,
             @RequestParam("fechaFin") String fechaFin,
-            @RequestParam("monto") Double monto,
-            @RequestParam("usuarioID") Integer usuarioID,
+            @RequestParam("precio") Double precio,
             @RequestParam(value = "materialID", required = false) Integer materialId,
             ModelMap model) {
         
         try {
-            Integer resultado = alquilerService.realizarAlquiler(alquilerId, fechaInicio, fechaFin, monto, usuarioID, materialId);
+            Integer resultado = alquilerService.realizarAlquiler(alquilerId, fechaInicio, fechaFin, precio, materialId);
             model.addAttribute("resultado", resultado);
         } catch (Exception e) {
             

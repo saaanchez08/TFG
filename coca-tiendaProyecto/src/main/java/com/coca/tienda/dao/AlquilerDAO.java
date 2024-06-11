@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public interface AlquilerDAO {
 
-	Integer realizarAlquiler(Integer alquilerId, String fechaInicio, String fechaFin, Double monto,
-			Integer usuarioID, Integer materialId) throws ClassNotFoundException, SQLException;
+	Integer realizarAlquiler(Integer alquilerId, String fechaInicio, String fechaFin, Double precio,
+			Integer materialId) throws ClassNotFoundException, SQLException;
 
 }

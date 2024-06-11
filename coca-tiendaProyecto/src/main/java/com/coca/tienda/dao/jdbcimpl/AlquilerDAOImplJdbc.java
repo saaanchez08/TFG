@@ -14,10 +14,10 @@ import com.coca.tienda.utils.DBUtils;
 public class AlquilerDAOImplJdbc implements AlquilerDAO {
 
     @Override
-    public Integer realizarAlquiler(Integer alquilerId, String fechaInicio, String fechaFin, Double monto,
-            Integer usuarioID, Integer materialId) throws ClassNotFoundException, SQLException {
+    public Integer realizarAlquiler(Integer alquilerId, String fechaInicio, String fechaFin, Double precio,
+            Integer materialId) throws ClassNotFoundException, SQLException {
 
-        String sql = "INSERT INTO alquiler (fechaInicio, fechaFin, monto, usuarioID, materialID) VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO alquiler (fechaInicio, fechaFin, materialID, precio) VALUES (?, ?, ?, ?, ?);";
 
 ;
 
@@ -27,9 +27,8 @@ public class AlquilerDAOImplJdbc implements AlquilerDAO {
 
             ps.setString(1, fechaInicio);
             ps.setString(2, fechaFin);
-            ps.setDouble(3, monto);
-            ps.setInt(4, usuarioID);
-            ps.setInt(5, materialId);
+            ps.setInt(3, materialId);
+            ps.setDouble(4, precio);
 
     	    Integer resultado = ps.executeUpdate();
 

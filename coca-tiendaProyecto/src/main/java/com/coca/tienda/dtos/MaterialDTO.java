@@ -1,22 +1,14 @@
 package com.coca.tienda.dtos;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-@Entity
 public class MaterialDTO {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long materialID;
+    private Integer materialID;
     private String nombre;
     private String descripcion;
     private Double precio;
     private String estado;
-    private Long categoriaID;
+    private Integer categoriaID;
     
-	public MaterialDTO(Long materialID, String nombre, String descripcion, Double precio, String estado, Long categoriaID) {
+	public MaterialDTO(Integer materialID, String nombre, String descripcion, Double precio, String estado, Integer categoriaID) {
 		super();
 		this.materialID = materialID;
 		this.nombre = nombre;
@@ -26,12 +18,10 @@ public class MaterialDTO {
 		this.categoriaID = categoriaID;
 	}
 	
-	
-	
-	public Long getMaterialID() {
+	public Integer getMaterialID() {
 		return materialID;
 	}
-	public void setMaterialID(Long materialID) {
+	public void setMaterialID(Integer materialID) {
 		this.materialID = materialID;
 	}
 	public String getNombre() {
@@ -58,10 +48,10 @@ public class MaterialDTO {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public Long getCategoriaID() {
+	public Integer getCategoriaID() {
 		return categoriaID;
 	}
-	public void setCategoriaID(Long categoriaID) {
+	public void setCategoriaID(Integer categoriaID) {
 		this.categoriaID = categoriaID;
 	}
 
