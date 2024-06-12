@@ -28,37 +28,24 @@
   </template>
   
   <script>
-  export default {
-    name: 'FormularioCategorias',
-    data() {
-      return {
-        id: '',
-        nombre: '',
-        descripcion: '',
-        categorias: [
-          { id: 1, nombre: 'Excavadoras', descripcion: 'Maquinaria utilizada para excavar.' },
-          { id: 2, nombre: 'Bulldozers', descripcion: 'Maquinaria utilizada para empujar grandes cantidades de tierra.' },
-          { id: 3, nombre: 'Retroexcavadoras', descripcion: 'Maquinaria combinada para excavar y cargar.' },
-          { id: 4, nombre: 'Gruas', descripcion: 'Maquinaria utilizada para levantar y mover objetos pesados.' },
-          { id: 5, nombre: 'Cargadoras', descripcion: 'Maquinaria utilizada para cargar materiales en camiones.' }
-        ],
-        resultados: []
-      };
-    },
-    methods: {
-      buscarCategoria() {
-        this.resultados = this.categorias.filter(categoria => {
-          return (
-            (this.id === '' || categoria.id === Number(this.id)) &&
-            (this.nombre === '' || categoria.nombre.toLowerCase().includes(this.nombre.toLowerCase())) &&
-            (this.descripcion === '' || categoria.descripcion.toLowerCase().includes(this.descripcion.toLowerCase()))
-          );
-        });
-      }
+export default {
+  name: 'FormularioCategorias',
+  data() {
+    return {
+      categoriaID: '',
+      nombre: '',
+      descripcion: '',
+      resultados: '',
+    };
+  },
+  methods: {
+    buscarCategoria() {
+      // Aquí iría la lógica para buscar una categoría
     }
   }
-  </script>
-  
+}
+</script>
+
   <style scoped>
   form {
     max-width: 400px;

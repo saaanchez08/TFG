@@ -24,6 +24,11 @@
             <i class="fas fa-car"></i> Categorías
           </router-link>
         </li>
+        <li>
+          <router-link to="/materiales">
+            <i class="fas fa-car2"></i> Materiales
+          </router-link>
+        </li>
       </ul>
     </nav>
     <router-view/>
