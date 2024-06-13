@@ -1,23 +1,28 @@
 <template>
   <form @submit.prevent="submitForm">
+
+   
     <div>
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" v-model="nombre" required>
+      <label for="fechaInicio">Fecha de Inicio:</label>
+      <input type="date" id="fechaInicio" v-model="fechaInicio" required>
     </div>
     <div>
-      <label for="maquinaria">Maquinaria:</label>
-      <select id="maquinaria" v-model="maquinaria" required>
-        <option value="" disabled>Selecciona una maquinaria</option>
-        <option v-for="item in maquinarias" :key="item" :value="item">{{ item }}</option>
+      <label for="fechaFin">Fecha de Fin:</label>
+      <input type="date" id="fechaFin" v-model="fechaFin" required @input="calculateDuracion">
+    </div>
+
+    <div>
+      <label for="materialID">MaterialID(nombre del material):</label>
+      <select id="materialID" v-model="materialID" required @change="updatePrecio">
+        <option value="" disabled>Selecciona un material</option>
+        <option v-for="item in materiales" :key="item.materialID" :value="item.materialID">
+          {{ item.materialID }}
+        </option>
       </select>
     </div>
     <div>
-      <label for="fecha">Fecha de Alquiler:</label>
-      <input type="date" id="fecha" v-model="fecha" required>
-    </div>
-    <div>
-      <label for="duracion">Duración (días):</label>
-      <input type="number" id="duracion" v-model="duracion" required>
+      <label for="precioTotal">Precio Total:</label>
+      <input type="text" id="precioTotal" v-model="precioTotal" readonly>
     </div>
     <button type="submit">Realizar Alquiler</button>
   </form>
@@ -29,32 +34,57 @@ export default {
   data() {
     return {
       nombre: '',
-      maquinaria: '',
-      fecha: '',
-      duracion: '',
-      maquinarias: ['Excavadora', 'Bulldozer', 'Retroexcavadora', 'Grua', 'Cargadora']
+      materialID: '',
+      fechaInicio: '',
+      fechaFin: '',
+      precioTotal: '',
+      materiales: [
+        { materialID: 1, precio: 150.00 },
+        { materialID: 2, precio: 200.00 },
+      ]
     };
   },
-  methods: {
-    submitForm() {
-      const alquiler = {
-        nombre: this.nombre,
-        maquinaria: this.maquinaria,
-        fecha: this.fecha,
-        duracion: this.duracion
-      };
-      console.log('Alquiler realizado:', alquiler);
-      // Aquí puedes agregar lógica para enviar los datos a un servidor o procesarlos como necesites
-      alert('Alquiler realizado con éxito');
-      this.resetForm();
-    },
-    resetForm() {
-      this.nombre = '';
-      this.maquinaria = '';
-      this.fecha = '';
-      this.duracion = '';
-    }
-  }
+  // methods: {
+  //   submitForm() {
+  //     const alquiler = {
+  //       nombre: this.nombre,
+  //       materialID: this.materialID,
+  //       fechaInicio: this.fechaInicio,
+  //       fechaFin: this.fechaFin,
+  //       duracion: this.duracion,
+  //       precioTotal: this.precioTotal
+  //     };
+  //     console.log('Alquiler realizado:', alquiler);
+  //     alert('Alquiler realizado con éxito');
+  //     this.resetForm();
+  //   },
+  //   resetForm() {
+  //     this.nombre = '';
+  //     this.materialID = '';
+  //     this.fechaInicio = '';
+  //     this.fechaFin = '';
+  //     this.duracion = 0;
+  //     this.precioTotal = '';
+  //   },
+  //   updatePrecio() {
+  //     this.calculatePrecioTotal();
+  //   },
+  //   calculateDuracion() {
+  //     if (this.fechaInicio && this.fechaFin) {
+  //       const startDate = new Date(this.fechaInicio);
+  //       const endDate = new Date(this.fechaFin);
+  //       const diffTime = Math.abs(endDate - startDate);
+  //       this.duracion = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+  //       this.calculatePrecioTotal();
+  //     }
+  //   },
+  //   calculatePrecioTotal() {
+  //     if (this.materialID && this.duracion > 0) {
+  //       const material = this.materiales.find(m => m.materialID === this.materialID);
+  //       this.precioTotal = (material.precio * this.duracion).toFixed(2);
+  //     }
+  //   }
+  // }
 }
 </script>
 
