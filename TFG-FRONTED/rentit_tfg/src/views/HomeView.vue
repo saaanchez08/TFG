@@ -1,22 +1,20 @@
 
 <template>
   <div class="home">
-    <h1>Esta es la página de inicio (ES APLICACION PARTE VENDEDORA COMO SI FUERA DETRAS DE UN MOSTRADOR)</h1>
+    <h1> Bienvenido a la Pagina de Administracion de Rent.<span style="color: yellow">it</span></h1>
+    <br>
+    <h2>Esta es la página de inicio <br> (ES APLICACION PARTE VENDEDORA COMO SI FUERA DETRAS DE UN MOSTRADOR)</h2>
   </div>
 </template>
 
 <style scoped>
 .home {
-  display: flex;
   justify-content: center; 
   align-items: center; 
-  height: 100vh; 
   text-align: center; 
 }
 
-.home h1 {
-  font-size: 2em; 
-}
+
 </style>
 
   <script>
@@ -24,4 +22,4 @@
   export default {
     name: 'HomeView',
   }
-  </script>
+</script>

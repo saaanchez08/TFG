@@ -1,33 +1,33 @@
 <template>
-    <div>
-      <h2>Búsqueda de Categorías</h2>
-      <form @submit.prevent="buscarCategoria">
-        <div>
-          <label for="id">ID Producto:</label>
-          <input type="number" id="id" v-model="id" placeholder="Buscar por ID">
-        </div>
-        <div>
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" v-model="nombre" placeholder="Buscar por nombre">
-        </div>
-        <div>
-          <label for="descripcion">Descripción:</label>
-          <input type="text" id="descripcion" v-model="descripcion" placeholder="Buscar por descripción">
-        </div>
-        <button type="submit">Buscar</button>
-      </form>
-      <ul v-if="resultados.length">
-        <li v-for="categoria in resultados" :key="categoria.id">
-          <h3>{{ categoria.nombre }}</h3>
-          <p>ID Producto: {{ categoria.id }}</p>
-          <p>Descripción: {{ categoria.descripcion }}</p>
-        </li>
-      </ul>
-      <p v-else>No se encontraron resultados.</p>
-    </div>
-  </template>
-  
-  <script>
+  <div>
+    <h2>Búsqueda de Categorías</h2>
+    <form @submit.prevent="buscarCategoria">
+      <div>
+        <label for="categoriaID">ID Categoría:</label>
+        <input type="number" id="categoriaID" v-model="categoriaID" placeholder="Buscar por ID">
+      </div>
+      <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" v-model="nombre" placeholder="Buscar por nombre">
+      </div>
+      <div>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" v-model="descripcion" placeholder="Buscar por descripción">
+      </div>
+      <button type="submit">Buscar</button>
+    </form>
+    <ul v-if="resultados.length">
+      <li v-for="categoria in resultados" :key="categoria.categoriaID">
+        <h3>{{ categoria.nombre }}</h3>
+        <p>ID Categoría: {{ categoria.categoriaID }}</p>
+        <p>Descripción: {{ categoria.descripcion }}</p>
+      </li>
+    </ul>
+    <p v-else-if="hasSearched" class="no-results">No se encontraron resultados.</p>
+  </div>
+</template>
+
+<script>
 export default {
   name: 'FormularioCategorias',
   data() {
@@ -35,18 +35,35 @@ export default {
       categoriaID: '',
       nombre: '',
       descripcion: '',
-      resultados: '',
+      resultados: [],
+      hasSearched: false 
     };
   },
   methods: {
     buscarCategoria() {
-      // Aquí iría la lógica para buscar una categoría
+      const url = new URL('http://localhost:8081/tienda/categoria');
+      const params = new URLSearchParams();
+
+      if (this.categoriaID) params.append('categoriaID', this.categoriaID);
+      if (this.nombre) params.append('nombre', this.nombre);
+      if (this.descripcion) params.append('descripcion', this.descripcion);
+
+      fetch(`${url}?${params.toString()}`)
+        .then(response => response.json())
+        .then(data => {
+          this.resultados = data;
+          this.hasSearched = true; 
+        })
+        .catch(error => {
+          console.error('Error al obtener los datos:', error);
+          this.hasSearched = true; 
+        });
     }
   }
 }
 </script>
 
-  <style scoped>
+<style scoped>
   form {
     max-width: 400px;
     margin: auto;
@@ -97,5 +114,5 @@ export default {
   p {
     margin: 5px 0;
   }
-  </style>
+</style>
   

@@ -1,33 +1,37 @@
 package com.coca.tienda.negocio.impl;
 
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.naming.NamingException;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import com.coca.tienda.dao.CategoriasDAO;
 import com.coca.tienda.dtos.CategoriaDTO;
-import com.coca.tienda.negocio.ICategoriasService;
+import com.coca.tienda.entities.Categoria;
+import com.coca.tienda.repositories.CategoriaRepository;
 
-@Component
-public class CategoriasService implements ICategoriasService {
+import java.util.List;
+import java.util.stream.Collectors;
 
-	@Autowired
-	CategoriasDAO categoriasDAO;
+@Service
+public class CategoriasService {
 
-	@Override
-	public List<CategoriaDTO> obtenerTodosCategorias() throws ClassNotFoundException, SQLException, NamingException {
-		// TODO Auto-generated method stub
-		return categoriasDAO.obtenerTodosCategorias();
-	}
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
-	@Override
-	public List<CategoriaDTO> buscarCategoria(String id, String nombre, String descripcion)
-			throws ClassNotFoundException, SQLException, NamingException {
-		// TODO Auto-generated method stub
-		return categoriasDAO.buscarCategoria(id, nombre, descripcion);
-	}
+    public List<CategoriaDTO> getAllCategorias() {
+        return categoriaRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<CategoriaDTO> getFilteredCategorias(Integer categoriaID, String nombre, String descripcion) {
+        return categoriaRepository.findAll().stream()
+                .filter(categoria -> categoriaID == null || categoria.getCategoriaID().equals(categoriaID))
+                .filter(categoria -> nombre == null || categoria.getNombre().toLowerCase().contains(nombre.toLowerCase()))
+                .filter(categoria -> descripcion == null || categoria.getDescripcion().toLowerCase().contains(descripcion.toLowerCase()))
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    private CategoriaDTO convertToDTO(Categoria categoria) {
+        return new CategoriaDTO(categoria.getCategoriaID(), categoria.getNombre(), categoria.getDescripcion());
+    }
 }

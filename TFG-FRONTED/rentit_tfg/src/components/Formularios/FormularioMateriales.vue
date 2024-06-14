@@ -1,72 +1,93 @@
 <template>
-    <div id="app">
-      <h1>Formulario de Materiales</h1>
-      <form @submit.prevent="submitForm">
-        <div>
-          <label for="materialID">Material ID:</label>
-          <input type="number" v-model="form.materialID" required />
-        </div>
-        <div>
-          <label for="nombre">Nombre:</label>
-          <input type="text" v-model="form.nombre" required />
-        </div>
-        <div>
-          <label for="descripcion">Descripción:</label>
-          <input type="text" v-model="form.descripcion" required />
-        </div>
-        <div>
-          <label for="precio">Precio:</label>
-          <input type="number" v-model="form.precio" required />
-        </div>
-        <div>
-          <label for="estado">Estado:</label>
-          <select v-model="form.estado" required>
-           <option value="Disponible">Disponible</option>
-            <option value="No Disponible">No Disponible</option>
-          </select>
-        </div>
-        <div>
-          <label for="categoriaID">Categoría ID:</label>
-          <input type="number" v-model="form.categoriaID" required />
-        </div>
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        form: {
-          materialID: '',
-          nombre: '',
-          descripcion: '',
-          precio: '',
-          estado: 'Disponible',
-          categoriaID: ''
-        }
-      }
-    },
-    methods: {
-      submitForm() {
-        console.log(this.form);
-        // Aquí puedes agregar la lógica para enviar los datos a tu servidor
-        // por ejemplo, usando Axios para hacer una petición HTTP POST
-        // axios.post('/api/materiales', this.form)
-        //   .then(response => {
-        //     console.log('Datos enviados:', response.data);
-        //   })
-        //   .catch(error => {
-        //     console.error('Error al enviar los datos:', error);
-        //   });
+  <div id="app">
+    <h1>Formulario de Materiales</h1>
+    <form @submit.prevent="buscarMaterial">
+      <div>
+        <label for="materialID">Material ID:</label>
+        <input type="number" v-model="form.materialID" />
+      </div>
+      <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" v-model="form.nombre" />
+      </div>
+      <div>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" v-model="form.descripcion" />
+      </div>
+      <div>
+        <label for="precio">Precio:</label>
+        <input type="number" v-model="form.precio" />
+      </div>
+      <div>
+        <label for="estado">Estado:</label>
+        <select v-model="form.estado" required>
+          <option value="Disponible">Disponible</option>
+          <option value="No Disponible">No Disponible</option>
+        </select>
+      </div>
+      <div>
+        <label for="categoriaID">Categoría ID:</label>
+        <input type="number" v-model="form.categoriaID" />
+      </div>
+      <button type="submit">Buscar</button>
+    </form>
+    <ul v-if="resultados.length">
+      <li v-for="material in resultados" :key="material.materialID">
+        <h3>{{ material.nombre }}</h3>
+        <p>ID: {{ material.materialID }}</p>
+        <p>Descripción: {{ material.descripcion }}</p>
+        <p>Precio: {{ material.precio }}</p>
+        <p>Estado: {{ material.estado }}</p>
+        <p>Categoría ID: {{ material.categoriaID }}</p>
+      </li>
+    </ul>
+    <p v-else-if="busquedaRealizada" class="no-results">No se encontraron resultados con los filtros proporcionados.</p>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      form: {
+        materialID: '',
+        nombre: '',
+        descripcion: '',
+        precio: '',
+        estado: 'Disponible',
+        categoriaID: ''
+      },
+      resultados: [],
+      busquedaRealizada: false
+    };
+  },
+  methods: {
+    async buscarMaterial() {
+      try {
+        const params = {};
+        if (this.form.materialID) params.materialID = this.form.materialID;
+        if (this.form.nombre) params.nombre = this.form.nombre;
+        if (this.form.descripcion) params.descripcion = this.form.descripcion;
+        if (this.form.precio) params.precio = this.form.precio;
+        if (this.form.estado) params.estado = this.form.estado;
+        if (this.form.categoriaID) params.categoriaID = this.form.categoriaID;
+
+        const response = await axios.get('http://localhost:8081/tienda/material', { params });
+        this.resultados = response.data;
+        this.busquedaRealizada = true; // Marca que la búsqueda ha sido realizada
+      } catch (error) {
+        console.error('Error al obtener datos del backend:', error);
       }
     }
   }
-  </script>
+};
+</script>
+
   
 
-  <style scoped>
+<style scoped>
   form {
     max-width: 400px;
     margin: auto;
@@ -117,5 +138,5 @@
   p {
     margin: 5px 0;
   }
-  </style>
+</style>
   

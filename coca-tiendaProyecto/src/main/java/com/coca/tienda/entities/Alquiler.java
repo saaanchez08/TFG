@@ -1,5 +1,8 @@
 package com.coca.tienda.entities;
 
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,8 +19,13 @@ public class Alquiler {
     @ManyToOne
     @JoinColumn(name = "materialID", referencedColumnName = "materialID")
     private Material material;
-    private String fechaInicio;
-    private String fechaFin;
+    
+    @Column(name = "fechaInicio")
+    private LocalDate fechaInicio;
+
+    @Column(name = "fechaFin")
+    private LocalDate fechaFin;
+
     private Double precio;
     
 	public Integer getAlquilerID() {
@@ -32,16 +40,16 @@ public class Alquiler {
 	public void setMaterial(Material material) {
 		this.material = material;
 	}
-	public String getFechaInicio() {
+	public LocalDate  getFechaInicio() {
 		return fechaInicio;
 	}
-	public void setFechaInicio(String fechaInicio) {
+	public void setFechaInicio(LocalDate  fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
-	public String getFechaFin() {
+	public LocalDate  getFechaFin() {
 		return fechaFin;
 	}
-	public void setFechaFin(String fechaFin) {
+	public void setFechaFin(LocalDate  fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 	public Double getPrecio() {
@@ -50,6 +58,4 @@ public class Alquiler {
 	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
-
-    // Getters y setters
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,7 +20,13 @@ public class MaterialController {
     private MaterialService materialService;
 
     @GetMapping
-    public List<MaterialDTO> getAllMaterials() {
-        return materialService.getAllMaterials();
+    public List<MaterialDTO> getAllMaterials(
+            @RequestParam(required = false) Integer materialID,
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) String descripcion,
+            @RequestParam(required = false) Double precio,
+            @RequestParam(required = false) String estado,
+            @RequestParam(required = false) Integer categoriaID) {
+        return materialService.getFilteredMaterials(materialID, nombre, descripcion, precio, estado, categoriaID);
     }
 }

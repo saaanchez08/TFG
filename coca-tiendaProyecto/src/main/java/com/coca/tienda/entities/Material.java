@@ -9,12 +9,12 @@ import jakarta.persistence.Id;
 public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer materialID;  // Cambiado a Integer
+    private Integer materialID; 
     private String nombre;
     private String descripcion;
     private Double precio;
     private String estado;
-    private Integer categoriaID;  // También cambiaste categoría a Integer
+    private Integer categoriaID;  
 
     // Getters y setters
     public Integer getMaterialID() {

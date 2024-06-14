@@ -17,18 +17,25 @@ public class MaterialService {
     private MaterialRepository materialRepository;
 
     public List<MaterialDTO> getAllMaterials() {
-        return materialRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
+        return materialRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<MaterialDTO> getFilteredMaterials(Integer materialID, String nombre, String descripcion, Double precio, String estado, Integer categoriaID) {
+        return materialRepository.findAll().stream()
+                .filter(material -> materialID == null || material.getMaterialID().equals(materialID))
+                .filter(material -> nombre == null || material.getNombre().toLowerCase().contains(nombre.toLowerCase()))
+                .filter(material -> descripcion == null || material.getDescripcion().toLowerCase().contains(descripcion.toLowerCase()))
+                .filter(material -> precio == null || material.getPrecio().equals(precio))
+                .filter(material -> estado == null || material.getEstado().equalsIgnoreCase(estado))
+                .filter(material -> categoriaID == null || material.getCategoriaID().equals(categoriaID))
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     private MaterialDTO convertToDTO(Material material) {
-        return new MaterialDTO(
-                material.getMaterialID(),
-                material.getNombre(),
-                material.getDescripcion(),
-                material.getPrecio(),
-                material.getEstado(),
-                material.getCategoriaID()
-        );
+        return new MaterialDTO(material.getMaterialID(), material.getNombre(), material.getDescripcion(), material.getPrecio(), material.getEstado(), material.getCategoriaID());
     }
 }
 

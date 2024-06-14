@@ -4,3 +4,9 @@ h1 {
     font-family: Arial, sans-serif; /* Puedes cambiar la fuente a tu preferencia */
     margin-top: 20px;
 }
+.no-results {
+    text-align: center;
+    font-size: 1.5em;
+    color: #ff0000;
+    margin-top: 50px;
+}

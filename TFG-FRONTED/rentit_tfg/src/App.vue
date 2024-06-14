@@ -26,7 +26,7 @@
         </li>
         <li>
           <router-link to="/materiales">
-            <i class="fas fa-car2"></i> Materiales
+            <i class="fa-solid fa-weight-hanging"></i> Materiales
           </router-link>
         </li>
       </ul>
@@ -40,7 +40,6 @@ nav {
   width: 250px;
   height: 100vh;
   padding: 20px;
-  border-radius: 10px;
   position: fixed;
   top: 0;
   left: 0;
