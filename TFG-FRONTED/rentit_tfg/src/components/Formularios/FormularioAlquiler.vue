@@ -1,28 +1,35 @@
 <template>
-  <form @submit.prevent="submitForm">
-    <div>
-      <label for="fechaInicio">Fecha de Inicio:</label>
-      <input type="date" id="fechaInicio" v-model="fechaInicio" required>
+  <div>
+    <form @submit.prevent="submitForm">
+      <div>
+        <label for="fecha_inicio">Fecha de Inicio:</label>
+        <input type="date" id="fecha_inicio" v-model="fecha_inicio" required>
+      </div>
+      <div>
+        <label for="fecha_fin">Fecha de Fin:</label>
+        <input type="date" id="fecha_fin" v-model="fecha_fin" required @change="calculatePrecioTotal">
+      </div>
+      <div>
+        <label for="materialID">Material:</label>
+        <select id="materialID" v-model="materialID" required>
+          <option value="" disabled>Selecciona un material</option>
+          <option v-for="material in materiales" :key="material.materialID" :value="material.materialID">
+            {{ material.nombre }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label for="precioTotal">Precio Total:</label>
+        <input type="text" id="precioTotal" v-model="precioTotal" readonly>
+      </div>
+      <button type="submit">Realizar Alquiler</button>
+    </form>
+
+    <!-- Mensaje de éxito -->
+    <div v-if="successMessage" class="success-message">
+      {{ successMessage }}
     </div>
-    <div>
-      <label for="fechaFin">Fecha de Fin:</label>
-      <input type="date" id="fechaFin" v-model="fechaFin" required @change="calculatePrecioTotal">
-    </div>
-    <div>
-      <label for="materialID">Material:</label>
-      <select id="materialID" v-model="materialID" required>
-        <option value="" disabled>Selecciona un material</option>
-        <option v-for="material in materiales" :key="material.materialID" :value="material.materialID">
-          {{ material.nombre }}
-        </option>
-      </select>
-    </div>
-    <div>
-      <label for="precioTotal">Precio Total:</label>
-      <input type="text" id="precioTotal" v-model="precioTotal" readonly>
-    </div>
-    <button type="submit">Realizar Alquiler</button>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -32,8 +39,8 @@ export default {
   name: 'FormularioAlquiler',
   data() {
     return {
-      fechaInicio: '',
-      fechaFin: '',
+      fecha_inicio: '',
+      fecha_fin: '',
       materialID: '',
       materiales: [], // Aquí se almacenarán los materiales obtenidos del backend
       precioTotal: '',
@@ -41,39 +48,36 @@ export default {
   },
   methods: {
     async submitForm() {
-      // Validar formulario antes de enviar
-      if (!this.fechaInicio || !this.fechaFin || !this.materialID) {
+      if (!this.fecha_inicio || !this.fecha_fin || !this.materialID) {
         alert('Por favor completa todos los campos');
         return;
       }
 
-      // Calcular precio total antes de enviar
       this.calculatePrecioTotal();
 
-      // Preparar objeto de datos para enviar al backend
       const formData = {
-        fechaInicio: this.fechaInicio,
-        fechaFin: this.fechaFin,
-        materialID: this.materialID,
-        precioTotal: this.precioTotal,
+        fecha_inicio: this.fecha_inicio,
+        fecha_fin: this.fecha_fin,
+        material: {
+          materialID: this.materialID
+        },
+        precio: parseFloat(this.precioTotal)
       };
 
       try {
-        // Realizar la solicitud POST al backend para guardar el alquiler
-        const response = await axios.post('http://localhost:puerto/tienda/alquiler/realizar', formData);
-
+        const response = await axios.post('http://localhost:8081/tienda/alquiler/realizar', formData);
         console.log('Respuesta del servidor:', response.data);
         alert('Alquiler realizado con éxito');
-        this.resetForm(); // Reiniciar formulario después del éxito
+        this.resetForm();
       } catch (error) {
-        console.error('Error al realizar el alquiler:', error.response.data);
+        console.error('Error al realizar el alquiler:', error.response ? error.response.data : error.message);
         alert('Error al realizar el alquiler');
       }
     },
     async fetchMateriales() {
       try {
         // Obtener la lista de materiales desde el backend solo una vez al cargar el formulario
-        const response = await axios.get('http://localhost:puerto/tienda/materiales');
+        const response = await axios.get('http://localhost:8081/tienda/material');
         this.materiales = response.data; // Asignar los materiales al array en data()
       } catch (error) {
         console.error('Error al obtener la lista de materiales:', error);
@@ -81,15 +85,15 @@ export default {
       }
     },
     calculatePrecioTotal() {
-      if (this.fechaInicio && this.fechaFin && this.materialID) {
+      if (this.fecha_inicio && this.fecha_fin && this.materialID) {
         // Calcular la diferencia en días entre las fechas
-        const start = new Date(this.fechaInicio);
-        const end = new Date(this.fechaFin);
+        const start = new Date(this.fecha_inicio);
+        const end = new Date(this.fecha_fin);
         const diffTime = Math.abs(end - start);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
         // Obtener el material seleccionado
-        const material = this.materiales.find(m => m.materialID === this.materialID);
+        const material = this.materiales.find(m => m.materialID === parseInt(this.materialID));
 
         // Calcular el precio total basado en el precio del material y los días de alquiler
         if (material) {
@@ -100,8 +104,8 @@ export default {
       }
     },
     resetForm() {
-      this.fechaInicio = '';
-      this.fechaFin = '';
+      this.fecha_inicio = '';
+      this.fecha_fin = '';
       this.materialID = '';
       this.precioTotal = '';
     },

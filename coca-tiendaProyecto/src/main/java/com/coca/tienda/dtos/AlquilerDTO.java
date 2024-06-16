@@ -1,51 +1,41 @@
 package com.coca.tienda.dtos;
 
-
 public class AlquilerDTO {
-    private Integer alquilerId;
-    private String fechaInicio;
-    private String fechaFin;
-    private Double precio;
-    private Integer materialId;
+    private String fecha_inicio;
+    private String fecha_fin;
+    private int materialID;
+    private double precio;
 
-
-    public int getAlquilerId() {
-        return alquilerId;
+    // Getters y setters
+    public String getFecha_inicio() {
+        return fecha_inicio;
     }
 
-    public void setAlquilerId(int alquilerId) {
-        this.alquilerId = alquilerId;
+    public void setFecha_inicio(String fecha_inicio) {
+        this.fecha_inicio = fecha_inicio;
     }
 
-    public String getFechaInicio() {
-        return fechaInicio;
+    public String getFecha_fin() {
+        return fecha_fin;
     }
 
-    public void setFechaInicio(String fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setFecha_fin(String fecha_fin) {
+        this.fecha_fin = fecha_fin;
     }
 
-    public String getFechaFin() {
-        return fechaFin;
+    public int getMaterialID() {
+        return materialID;
     }
 
-    public void setFechaFin(String fechaFin) {
-        this.fechaFin = fechaFin;
+    public void setMaterialID(int materialID) {
+        this.materialID = materialID;
     }
 
     public double getPrecio() {
         return precio;
     }
 
-    public void setMonto(double precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
-    }
-
-    public int getMaterialId() {
-        return materialId;
-    }
-
-    public void setMaterialId(int materialId) {
-        this.materialId = materialId;
     }
 }

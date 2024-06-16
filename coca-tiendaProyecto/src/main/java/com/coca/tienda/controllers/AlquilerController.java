@@ -1,7 +1,6 @@
 package com.coca.tienda.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,14 +20,14 @@ public class AlquilerController {
     private AlquilerService alquilerService;
 
     @PostMapping("/realizar")
-    public ResponseEntity<?> realizarAlquiler(@RequestBody Alquiler alquiler) {
+    public ResponseEntity<Alquiler> realizarAlquiler(@RequestBody Alquiler alquiler) {
         try {
-            alquilerService.calcularPrecioTotal(alquiler); // Implementar este método en AlquilerService
-            Integer resultado = alquilerService.realizarAlquiler(alquiler);
-            return ResponseEntity.ok(resultado);
+            Alquiler nuevoAlquiler = alquilerService.realizarAlquiler(alquiler);
+            return ResponseEntity.ok(nuevoAlquiler);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al realizar el alquiler: " + e.getMessage());
+            return ResponseEntity.status(500).body(null);
         }
     }
 }

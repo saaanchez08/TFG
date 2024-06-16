@@ -7,7 +7,7 @@ import javax.naming.NamingException;
 
 import com.coca.tienda.dtos.ComboDTO;
 
-public interface UsuariosDAO {
-
-	public Integer insertarUsuarios(String nombre, String email, String contrasena)throws ClassNotFoundException, SQLException, NamingException;
-}
+//public interface UsuariosDAO {
+//
+//	public Integer insertarUsuarios(String nombre, String email, String contrasena)throws ClassNotFoundException, SQLException, NamingException;
+//}
