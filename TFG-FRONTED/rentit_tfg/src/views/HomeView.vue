@@ -9,11 +9,23 @@
 
 <style scoped>
 .home {
-  justify-content: center; 
   align-items: center; 
   text-align: center; 
+  /* Establecer la imagen de fondo */
+  background-image: url('@/assets/img/pexels-kawserhamid-176342.jpg'); /* Ajusta la ruta según donde tengas tu imagen */
+  background-size: cover; /* Ajusta el tamaño para cubrir completamente el contenedor */
+  background-position: center; /* Centra la imagen de fondo */
+  min-height: 98vh; /* Asegura que el fondo cubra toda la altura de la pantalla */
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  color: white;
 }
 
+h1 {
+margin-top: 10%;
+color: white;
+}
 
 </style>
 

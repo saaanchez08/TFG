@@ -1,14 +1,6 @@
 <template>
-  <div>
+  <div class="container">
     <form @submit.prevent="submitForm">
-      <div>
-        <label for="fecha_inicio">Fecha de Inicio:</label>
-        <input type="date" id="fecha_inicio" v-model="fecha_inicio" required>
-      </div>
-      <div>
-        <label for="fecha_fin">Fecha de Fin:</label>
-        <input type="date" id="fecha_fin" v-model="fecha_fin" required @change="calculatePrecioTotal">
-      </div>
       <div>
         <label for="materialID">Material:</label>
         <select id="materialID" v-model="materialID" required>
@@ -19,45 +11,63 @@
         </select>
       </div>
       <div>
+        <label for="fechaInicio">Fecha de Inicio:</label>
+        <input type="date" id="fechaInicio" v-model="fechaInicio" required>
+      </div>
+      <div>
+        <label for="fechaFin">Fecha de Fin:</label>
+        <input type="date" id="fechaFin" v-model="fechaFin" required :min="fechaInicio" @change="calculatePrecioTotal">
+      </div>
+      <div>
         <label for="precioTotal">Precio Total:</label>
         <input type="text" id="precioTotal" v-model="precioTotal" readonly>
       </div>
       <button type="submit">Realizar Alquiler</button>
     </form>
-
-    <!-- Mensaje de éxito -->
-    <div v-if="successMessage" class="success-message">
-      {{ successMessage }}
+    <div v-if="alquilerRealizado" class="resumen">
+      <h2>Resumen del Alquiler</h2>
+      <p><strong>Fecha de Inicio:</strong> {{ fechaInicio }}</p>
+      <p><strong>Fecha de Fin:</strong> {{ fechaFin }}</p>
+      <p><strong>Material:</strong> {{ getMaterialNombre(materialID) }}</p>
+      <p><strong>Precio Total:</strong> {{ precioTotal }}</p>
+      <button @click="generarPDF">Generar PDF</button>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import jsPDF from 'jspdf';
 
 export default {
   name: 'FormularioAlquiler',
   data() {
     return {
-      fecha_inicio: '',
-      fecha_fin: '',
+      fechaInicio: '',
+      fechaFin: '',
       materialID: '',
       materiales: [], // Aquí se almacenarán los materiales obtenidos del backend
       precioTotal: '',
+      alquilerRealizado: false, // Nuevo estado para mostrar el resumen
     };
   },
   methods: {
-    async submitForm() {
-      if (!this.fecha_inicio || !this.fecha_fin || !this.materialID) {
+        async submitForm() {
+      if (!this.fechaInicio || !this.fechaFin || !this.materialID) {
         alert('Por favor completa todos los campos');
+        return;
+      }
+
+      if (new Date(this.fechaFin) < new Date(this.fechaInicio)) {
+        alert('La fecha de fin debe ser posterior o igual a la fecha de inicio');
         return;
       }
 
       this.calculatePrecioTotal();
 
       const formData = {
-        fecha_inicio: this.fecha_inicio,
-        fecha_fin: this.fecha_fin,
+        fecha_inicio: this.fechaInicio,
+        fecha_fin: this.fechaFin,
         material: {
           materialID: this.materialID
         },
@@ -68,9 +78,9 @@ export default {
         const response = await axios.post('http://localhost:8081/tienda/alquiler/realizar', formData);
         console.log('Respuesta del servidor:', response.data);
         alert('Alquiler realizado con éxito');
-        this.resetForm();
+        this.alquilerRealizado = true; // Mostrar el resumen al realizar el alquiler
       } catch (error) {
-        console.error('Error al realizar el alquiler:', error.response ? error.response.data : error.message);
+        console.error('Error al realizar el alquiler:', error.response.data);
         alert('Error al realizar el alquiler');
       }
     },
@@ -85,10 +95,10 @@ export default {
       }
     },
     calculatePrecioTotal() {
-      if (this.fecha_inicio && this.fecha_fin && this.materialID) {
+      if (this.fechaInicio && this.fechaFin && this.materialID) {
         // Calcular la diferencia en días entre las fechas
-        const start = new Date(this.fecha_inicio);
-        const end = new Date(this.fecha_fin);
+        const start = new Date(this.fechaInicio);
+        const end = new Date(this.fechaFin);
         const diffTime = Math.abs(end - start);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
@@ -104,11 +114,26 @@ export default {
       }
     },
     resetForm() {
-      this.fecha_inicio = '';
-      this.fecha_fin = '';
+      this.fechaInicio = '';
+      this.fechaFin = '';
       this.materialID = '';
       this.precioTotal = '';
     },
+    getMaterialNombre(materialID) {
+      const material = this.materiales.find(m => m.materialID === parseInt(materialID));
+      return material ? material.nombre : '';
+    },
+    generarPDF() {
+      const doc = new jsPDF();
+      doc.text('Resumen del Alquiler', 10, 10);
+      doc.text(`Fecha de Inicio: ${this.fechaInicio}`, 10, 20);
+      doc.text(`Fecha de Fin: ${this.fechaFin}`, 10, 30);
+      doc.text(`Material: ${this.getMaterialNombre(this.materialID)}`, 10, 40);
+      doc.text(`Precio Total: ${this.precioTotal}`, 10, 50);
+
+      doc.text('Gracias por alquilar con Rent.it', 10, 70);
+      doc.save('resumen_alquiler.pdf');
+    }
   },
   mounted() {
     // Cargar la lista de materiales al montar el componente
@@ -119,8 +144,10 @@ export default {
 
 <style scoped>
 form {
-  max-width: 400px;
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin-bottom: 20px;
 }
 div {
   margin-bottom: 15px;
@@ -143,5 +170,42 @@ button {
 }
 button:hover {
   background-color: #0056b3;
+}
+
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.form-resumen-container {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: flex-start; /* Alinear elementos al inicio verticalmente */
+  gap: 20px; /* Espacio entre el formulario y el resumen */
+  width: 100%; /* Para asegurar que el contenedor ocupe todo el ancho disponible */
+}
+
+.form-container, .resumen-container {
+  flex: 1;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 400px; /* Ancho máximo para los contenedores */
+  width: 50%; /* Ancho del contenedor */
+}
+
+.resumen {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: left;
 }
 </style>

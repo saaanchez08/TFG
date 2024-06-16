@@ -36,7 +36,7 @@
 </template>
 <style scoped>
 nav {
-  background-color: #34495e;
+  background-color: #393e46;
   width: 250px;
   height: 100vh;
   padding: 20px;
@@ -86,7 +86,7 @@ nav {
 }
 
 .menu-list a:hover {
-  color: #2980b9;
+  color: #f96d00;
 }
 </style>
 
