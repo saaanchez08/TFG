@@ -16,12 +16,12 @@
         </li>
         <li>
           <router-link to="/alquiler">
-            <i class="fas fa-briefcase"></i> Alquiler
+            <i class="fa-solid fa-cart-shopping"></i> Alquiler
           </router-link>
         </li>
         <li>
           <router-link to="/categorias">
-            <i class="fas fa-car"></i> Categorías
+            <i class="fa-solid fa-layer-group"></i> Categorías
           </router-link>
         </li>
         <li>

@@ -22,7 +22,7 @@
         <label for="precioTotal">Precio Total:</label>
         <input type="text" id="precioTotal" v-model="precioTotal" readonly>
       </div>
-      <button type="submit">Realizar Alquiler</button>
+      <button type="submit" class="alquiler-button"><span></span>Alquiler</button>
     </form>
     <div v-if="alquilerRealizado" class="resumen">
       <h2>Resumen del Alquiler</h2>
@@ -30,8 +30,13 @@
       <p><strong>Fecha de Fin:</strong> {{ fechaFin }}</p>
       <p><strong>Material:</strong> {{ getMaterialNombre(materialID) }}</p>
       <p><strong>Precio Total:</strong> {{ precioTotal }}</p>
-      <button @click="generarPDF">Generar PDF</button>
+      <button @click="generarPDF" class="pdf-button"><span></span>PDF</button>
     </div>
+    <footer class="footer">
+      <div class="footer-content">
+        <h3>RENT.<span style="color: yellow">IT</span></h3>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -155,24 +160,130 @@ div {
 label {
   display: block;
   margin-bottom: 5px;
+  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: bolder;
 }
 input, select {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
 }
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
+.alquiler-button {
+  padding: 0.9em 1.8em;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 4px;
+  color: transparent;
+  border: 3px solid #007bff;
+  font-size: 14px;
+  position: relative;
+  font-family: inherit;
+  background: transparent;
   cursor: pointer;
 }
-button:hover {
-  background-color: #0056b3;
+
+.alquiler-button::before {
+  content: "Alquiler";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #363636;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
 }
 
+.alquiler-button:hover::before {
+  left: 100%;
+  transform: scale(0) rotateY(360deg);
+  opacity: 0;
+}
 
+.alquiler-button::after {
+  content: "Realizar Alquiler";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #363636;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+  transform: scale(0) rotateY(0deg);
+  opacity: 0;
+}
+
+.alquiler-button:hover::after {
+  left: 0;
+  transform: scale(1) rotateY(360deg);
+  opacity: 1;
+}
+
+.pdf-button {
+  padding: 0.9em 1.8em;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 4px;
+  color: transparent;
+  border: 3px solid red;
+  font-size: 14px;
+  position: relative;
+  font-family: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.pdf-button::before {
+  content: "PDF";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #363636;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+}
+
+.pdf-button:hover::before {
+  left: 100%;
+  transform: scale(0) rotateY(360deg);
+  opacity: 0;
+}
+
+.pdf-button::after {
+  content: "Generar PDF";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #363636;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+  transform: scale(0) rotateY(0deg);
+  opacity: 0;
+}
+
+.pdf-button:hover::after {
+  left: 0;
+  transform: scale(1) rotateY(360deg);
+  opacity: 1;
+}
 
 .container {
   display: flex;
@@ -207,5 +318,24 @@ button:hover {
   padding: 20px;
   margin-top: 20px;
   text-align: left;
+}
+
+.footer {
+  width: 100%;
+  padding: 10px 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.footer-content h3 {
+  font-weight: bold;
+  font-size: 40px;
+  font-family: sans-serif;
 }
 </style>
