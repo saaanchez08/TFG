@@ -8,6 +8,7 @@ import com.coca.tienda.entities.Material;
 import com.coca.tienda.repositories.MaterialRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +37,15 @@ public class MaterialService {
 
     private MaterialDTO convertToDTO(Material material) {
         return new MaterialDTO(material.getMaterialID(), material.getNombre(), material.getDescripcion(), material.getPrecio(), material.getEstado(), material.getCategoriaID());
+    }
+    
+    public boolean deleteMaterial(Integer materialID) {
+        Optional<Material> materialOptional = materialRepository.findById(materialID);
+        if (materialOptional.isPresent()) {
+            materialRepository.delete(materialOptional.get());
+            return true;
+        }
+        return false;
     }
 }
 
