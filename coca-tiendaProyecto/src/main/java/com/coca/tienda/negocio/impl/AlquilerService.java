@@ -25,7 +25,6 @@ public class AlquilerService {
             throw new IllegalArgumentException("El precio del material no puede ser nulo");
         }
 
-        // Resto de la lógica para realizar el alquiler
         return alquilerRepository.save(alquiler);
     }
 }

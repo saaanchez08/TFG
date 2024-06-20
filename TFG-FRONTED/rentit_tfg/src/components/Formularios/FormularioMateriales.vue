@@ -85,7 +85,7 @@ export default {
 
         const response = await axios.get('http://localhost:8081/tienda/material', { params });
         this.resultados = response.data;
-        this.busquedaRealizada = true; // Marca que la búsqueda ha sido realizada
+        this.busquedaRealizada = true;
       } catch (error) {
         console.error('Error al obtener datos del backend:', error);
       }
@@ -214,8 +214,8 @@ p {
 .resultados-grid {
   width: 50%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr)); /* Ajuste de tamaño mínimo de columnas */
-  gap: 10px; /* Espacio entre los elementos */
+  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr)); 
+  gap: 10px; 
   margin-top: 20px;
   margin-left: 25%;
 }
@@ -223,10 +223,10 @@ p {
 .resultado-item {
   background-color: #363636;
   color: #ffffff;
-  padding: 10px; /* Reducir padding */
+  padding: 10px; 
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reducir sombra */
-  font-size: 14px; /* Ajuste de tamaño de fuente */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  font-size: 14px; 
   border: solid 3px #007bff;
   position: relative;
 }

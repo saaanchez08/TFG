@@ -172,8 +172,8 @@ export default {
   .resultados-grid {
     width: 50%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr)); /* Ajuste de tamaño mínimo de columnas */
-    gap: 10px; /* Espacio entre los elementos */
+    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr)); 
+    gap: 10px; 
     margin-top: 20px;
     margin-left: 25%;
   }
@@ -181,10 +181,10 @@ export default {
   .resultado-item {
     background-color: #363636;
     color: #ffffff;
-    padding: 10px; /* Reducir padding */
+    padding: 10px; 
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reducir sombra */
-    font-size: 14px; /* Ajuste de tamaño de fuente */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    font-size: 14px; 
     border: solid 3px #007bff;
   }
 

@@ -51,9 +51,9 @@ export default {
       fechaInicio: '',
       fechaFin: '',
       materialID: '',
-      materiales: [], // Aquí se almacenarán los materiales obtenidos del backend
+      materiales: [],
       precioTotal: '',
-      alquilerRealizado: false, // Nuevo estado para mostrar el resumen
+      alquilerRealizado: false,
     };
   },
   methods: {
@@ -83,7 +83,7 @@ export default {
         const response = await axios.post('http://localhost:8081/tienda/alquiler/realizar', formData);
         console.log('Respuesta del servidor:', response.data);
         alert('Alquiler realizado con éxito');
-        this.alquilerRealizado = true; // Mostrar el resumen al realizar el alquiler
+        this.alquilerRealizado = true;
       } catch (error) {
         console.error('Error al realizar el alquiler:', error.response.data);
         alert('Error al realizar el alquiler');
@@ -91,9 +91,8 @@ export default {
     },
     async fetchMateriales() {
       try {
-        // Obtener la lista de materiales desde el backend solo una vez al cargar el formulario
         const response = await axios.get('http://localhost:8081/tienda/material');
-        this.materiales = response.data; // Asignar los materiales al array en data()
+        this.materiales = response.data;
       } catch (error) {
         console.error('Error al obtener la lista de materiales:', error);
         alert('Error al cargar la lista de materiales');
@@ -101,16 +100,13 @@ export default {
     },
     calculatePrecioTotal() {
       if (this.fechaInicio && this.fechaFin && this.materialID) {
-        // Calcular la diferencia en días entre las fechas
         const start = new Date(this.fechaInicio);
         const end = new Date(this.fechaFin);
         const diffTime = Math.abs(end - start);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        // Obtener el material seleccionado
         const material = this.materiales.find(m => m.materialID === parseInt(this.materialID));
 
-        // Calcular el precio total basado en el precio del material y los días de alquiler
         if (material) {
           this.precioTotal = (material.precio * diffDays).toFixed(2);
         }
@@ -141,7 +137,6 @@ export default {
     }
   },
   mounted() {
-    // Cargar la lista de materiales al montar el componente
     this.fetchMateriales();
   },
 };

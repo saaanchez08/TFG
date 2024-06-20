@@ -12,11 +12,10 @@
 .home {
   align-items: center; 
   text-align: center; 
-  /* Establecer la imagen de fondo */
-  background-image: url('@/assets/img/pexels-kawserhamid-176342.jpg'); /* Ajusta la ruta según donde tengas tu imagen */
-  background-size: cover; /* Ajusta el tamaño para cubrir completamente el contenedor */
-  background-position: center; /* Centra la imagen de fondo */
-  min-height: 98vh; /* Asegura que el fondo cubra toda la altura de la pantalla */
+  background-image: url('@/assets/img/pexels-kawserhamid-176342.jpg'); 
+  background-size: cover; 
+  background-position: center; 
+  min-height: 98vh; 
   display: flex;
   flex-direction: column;
   font-family: Arial, sans-serif;

@@ -11,10 +11,7 @@
     export default {
       name: 'Materiales',
       components: {
-          FormularioMateriales,
-      
-          
-          
+        FormularioMateriales,             
       },
       data() {
         return {
@@ -31,15 +28,6 @@
       methods: {
         submitForm() {
           console.log(this.form);
-          // Aquí puedes agregar la lógica para enviar los datos a tu servidor
-          // por ejemplo, usando Axios para hacer una petición HTTP POST
-          // axios.post('/api/materiales', this.form)
-          //   .then(response => {
-          //     console.log('Datos enviados:', response.data);
-          //   })
-          //   .catch(error => {
-          //     console.error('Error al enviar los datos:', error);
-          //   });
         },
       },
     };
