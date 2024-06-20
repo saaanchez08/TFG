@@ -13,7 +13,18 @@ public class Categoria {
     private String nombre;
     private String descripcion;
 
-    // Getters y setters
+    public Categoria() {
+		// TODO Auto-generated constructor stub
+	}
+    public Categoria(Integer categoriaID, String nombre, String descripcion) {
+    	this.categoriaID = categoriaID;
+    	this.nombre = nombre;
+    	this.descripcion = descripcion;
+    	
+    }
+
+
+	// Getters y setters
     public Integer getCategoriaID() {
         return categoriaID;
     }

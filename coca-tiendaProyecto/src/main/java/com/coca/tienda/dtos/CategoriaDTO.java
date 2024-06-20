@@ -1,23 +1,23 @@
 package com.coca.tienda.dtos;
 
 public class CategoriaDTO {
-	private Integer id;
+	private Integer categoriaID;
 	private String nombre;
 	private String descripcion;
 
-	public CategoriaDTO(Integer id, String nombre, String descripcion) {
+	public CategoriaDTO(Integer categoriaID, String nombre, String descripcion) {
 		super();
-		this.id = id;
+		this.categoriaID = categoriaID;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getcategoriaID() {
+		return categoriaID;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setcategoriaID(Integer categoriaID) {
+		this.categoriaID = categoriaID;
 	}
 
 	public String getNombre() {
