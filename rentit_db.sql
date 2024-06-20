@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: rentit_db
+-- Host: localhost    Database: rentit_db
 -- ------------------------------------------------------
 -- Server version	8.0.30
 
@@ -24,14 +24,14 @@ DROP TABLE IF EXISTS `alquiler`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `alquiler` (
   `alquilerID` int NOT NULL AUTO_INCREMENT,
-  `fechaInicio` date NOT NULL,
-  `fechaFin` date NOT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `fecha_fin` date DEFAULT NULL,
   `materialID` int DEFAULT NULL,
-  `precio` decimal(10,2) DEFAULT NULL,
+  `precio` double DEFAULT NULL,
   PRIMARY KEY (`alquilerID`),
   KEY `materialID` (`materialID`),
-  CONSTRAINT `alquiler_ibfk_2` FOREIGN KEY (`materialID`) REFERENCES `material` (`materialID`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `alquiler_ibfk_2` FOREIGN KEY (`materialID`) REFERENCES `material` (`materialID`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `alquiler` (
 
 LOCK TABLES `alquiler` WRITE;
 /*!40000 ALTER TABLE `alquiler` DISABLE KEYS */;
-INSERT INTO `alquiler` VALUES (1,'2023-03-01','2023-03-15',1,150.00),(2,'2023-03-01','2023-03-02',2,200.00),(3,'2024-05-12','2024-05-12',1,150.00),(4,'2024-05-13','2024-05-24',1,150.00),(5,'2024-05-12','2024-05-19',2,200.00),(6,'2024-05-26','2024-05-25',1,150.00),(7,'2024-05-25','2024-06-08',1,150.00),(8,'2024-05-17','2024-05-31',1,150.00),(9,'2024-05-17','2024-05-31',1,150.00),(10,'2024-05-25','2024-05-25',1,150.00),(11,'2024-05-14','2024-05-29',1,150.00),(12,'2024-05-17','2024-05-22',2,200.00),(13,'2024-05-14','2024-05-18',1,150.00),(14,'2024-05-14','2024-05-21',1,150.00),(15,'2024-05-14','2024-05-21',1,150.00),(16,'2024-05-14','2024-05-21',1,150.00),(17,'2024-05-14','2024-05-16',1,150.00),(18,'2024-05-08','2024-05-31',2,200.00);
+INSERT INTO `alquiler` VALUES (1,'2023-03-01','2023-03-15',1,150),(2,'2023-03-01','2023-03-02',2,200),(3,'2024-05-12','2024-05-12',1,150),(4,'2024-05-13','2024-05-24',1,150),(5,'2024-05-12','2024-05-19',2,200),(6,'2024-05-26','2024-05-25',1,150),(7,'2024-05-25','2024-06-08',1,150),(8,'2024-05-17','2024-05-31',1,150),(9,'2024-05-17','2024-05-31',1,150),(10,'2024-05-25','2024-05-25',1,150),(11,'2024-05-14','2024-05-29',1,150),(12,'2024-05-17','2024-05-22',2,200),(13,'2024-05-14','2024-05-18',1,150),(14,'2024-05-14','2024-05-21',1,150),(15,'2024-05-14','2024-05-21',1,150),(16,'2024-05-14','2024-05-21',1,150),(17,'2024-05-14','2024-05-16',1,150),(18,'2024-05-08','2024-05-31',2,200),(19,'2024-06-15','2024-06-20',1,100),(20,'2024-06-15','2024-06-20',4,400),(21,'2024-06-15','2024-06-20',1,100),(23,'2024-06-17','2024-06-23',5,1800),(24,'2024-06-17','2024-06-25',6,400),(25,'2024-06-17','2024-06-20',9,1200),(26,'2024-06-17','2024-06-21',7,1000),(27,'2024-06-17','2024-06-18',6,50),(28,'2024-06-17','2024-06-18',7,250),(29,'2024-06-17','2024-06-19',6,100),(30,'2024-06-17','2024-06-19',5,600),(31,'2024-06-17','2024-06-19',6,100),(32,'2024-06-16','2024-06-17',7,250),(33,'2024-06-17','2024-06-18',3,150),(34,'2024-06-17','2024-06-20',3,450),(35,'2024-06-19','2024-06-20',1,150),(36,'2024-06-19','2024-06-21',3,300),(37,'2024-06-18','2024-06-20',3,300),(38,'2024-06-18','2024-06-21',3,450),(40,'2024-06-18','2024-06-25',1,100),(41,'2024-06-20','2024-06-22',2,400),(42,'2024-06-20','2024-06-23',3,450);
 /*!40000 ALTER TABLE `alquiler` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +80,7 @@ CREATE TABLE `material` (
   `materialID` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   `descripcion` text,
-  `precio` decimal(10,2) NOT NULL,
+  `precio` double DEFAULT NULL,
   `estado` varchar(255) NOT NULL,
   `categoriaID` int DEFAULT NULL,
   PRIMARY KEY (`materialID`),
@@ -95,7 +95,7 @@ CREATE TABLE `material` (
 
 LOCK TABLES `material` WRITE;
 /*!40000 ALTER TABLE `material` DISABLE KEYS */;
-INSERT INTO `material` VALUES (1,'Grúa Torre','Grúa de torre para construcción de altura',150.00,'Disponible',1),(2,'Camión Volteo','Camión para transporte de materiales grandes',200.00,'Disponible',2),(3,'Grúa Torre','Grúa de torre para construcción de altura',150.00,'Disponible',1),(4,'Camión Volteo','Camión para transporte de materiales grandes',200.00,'Disponible',2),(5,'Excavadora','Máquina utilizada para excavaciones profundas',300.00,'Disponible',2),(6,'Andamio','Estructura temporal para sostener a trabajadores',50.00,'Disponible',1),(7,'Montacargas','Vehículo industrial utilizado para el levantamiento de materiales',250.00,'Disponible',2),(8,'Plataforma Elevadora','Equipo para elevar trabajadores a grandes alturas',100.00,'Disponible',1),(9,'Bulldozer','Máquina de construcción para mover grandes cantidades de material',400.00,'Disponible',2),(10,'Compactador','Equipo utilizado para compactar suelo y asfalto',150.00,'Disponible',2),(11,'Hormigonera','Equipo para mezclar cemento y hormigón',120.00,'Disponible',2),(12,'Cargadora Frontal','Vehículo de construcción para cargar materiales',350.00,'Disponible',2);
+INSERT INTO `material` VALUES (1,'Grúa Torre','Grúa de torre para construcción de altura',150,'Disponible',1),(2,'Camión Volteo','Camión para transporte de materiales grandes',200,'Disponible',2),(3,'Grúa Torre','Grúa de torre para construcción de altura',150,'Disponible',1),(4,'Camión Volteo','Camión para transporte de materiales grandes',200,'Disponible',2),(5,'Excavadora','Máquina utilizada para excavaciones profundas',300,'Disponible',2),(6,'Andamio','Estructura temporal para sostener a trabajadores',50,'Disponible',1),(7,'Montacargas','Vehículo industrial utilizado para el levantamiento de materiales',250,'Disponible',2),(9,'Bulldozer','Máquina de construcción para mover grandes cantidades de material',400,'Disponible',2);
 /*!40000 ALTER TABLE `material` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -108,4 +108,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-08 17:06:13
+-- Dump completed on 2024-06-20 13:05:19

@@ -47,5 +47,29 @@ public class MaterialService {
         }
         return false;
     }
-}
+    
+    public boolean insertMaterial(MaterialDTO materialDTO) {
+        try {
+            Material material = new Material(materialDTO.getMaterialID(), materialDTO.getNombre(), materialDTO.getDescripcion(), materialDTO.getPrecio(), materialDTO.getEstado(), materialDTO.getCategoriaID());
+            materialRepository.save(material);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
+    public boolean updateMaterial(Integer materialID, MaterialDTO materialDTO) {
+        Optional<Material> materialOptional = materialRepository.findById(materialID);
+        if (materialOptional.isPresent()) {
+            Material material = materialOptional.get();
+            material.setNombre(materialDTO.getNombre());
+            material.setDescripcion(materialDTO.getDescripcion());
+            material.setPrecio(materialDTO.getPrecio());
+            material.setEstado(materialDTO.getEstado());
+            material.setCategoriaID(materialDTO.getCategoriaID());
+            materialRepository.save(material);
+            return true;
+        }
+        return false;
+    }
+}

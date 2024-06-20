@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +42,26 @@ public class MaterialController {
         boolean deleted = materialService.deleteMaterial(materialID);
         if (deleted) {
             return ResponseEntity.ok("Material eliminado correctamente");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Material no encontrado");
+        }
+    }
+    
+    @PostMapping
+    public ResponseEntity<String> insertMaterial(@RequestBody MaterialDTO materialDTO) {
+        boolean inserted = materialService.insertMaterial(materialDTO);
+        if (inserted) {
+            return ResponseEntity.status(HttpStatus.CREATED).body("Material insertado correctamente");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al insertar el material");
+        }
+    }
+
+    @PutMapping("/{materialID}")
+    public ResponseEntity<String> updateMaterial(@PathVariable Integer materialID, @RequestBody MaterialDTO materialDTO) {
+        boolean updated = materialService.updateMaterial(materialID, materialDTO);
+        if (updated) {
+            return ResponseEntity.ok("Material actualizado correctamente");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Material no encontrado");
         }

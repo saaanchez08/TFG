@@ -16,7 +16,19 @@ public class Material {
     private String estado;
     private Integer categoriaID;  
 
-    // Getters y setters
+
+    public Material() {
+    }
+
+    public Material(Integer materialID, String nombre, String descripcion, Double precio, String estado, Integer categoriaID) {
+        this.materialID = materialID;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.estado = estado;
+        this.categoriaID = categoriaID;
+    }
+    
     public Integer getMaterialID() {
         return materialID;
     }
