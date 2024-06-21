@@ -1,12 +1,21 @@
 package com.coca.tienda.dtos;
 
 public class AlquilerDTO {
+	private Integer alquilerID;
     private String fecha_inicio;
     private String fecha_fin;
     private int materialID;
     private double precio;
 
     // Getters y setters
+    public Integer getAlquilerID() {
+        return alquilerID;
+    }
+
+    public void setAlquilerID(Integer alquilerID) {
+        this.alquilerID = alquilerID;
+    }
+
     public String getFecha_inicio() {
         return fecha_inicio;
     }
