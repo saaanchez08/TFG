@@ -3,13 +3,14 @@ package com.coca.tienda.negocio.impl;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.coca.tienda.dtos.AlquilerDTO;
 import com.coca.tienda.entities.Alquiler;
-import com.coca.tienda.entities.Categoria;
 import com.coca.tienda.entities.Material;
 import com.coca.tienda.repositories.AlquilerRepository;
 import com.coca.tienda.repositories.MaterialRepository;
@@ -63,4 +64,19 @@ public class AlquilerService {
         dto.setPrecio(alquiler.getPrecio());
         return dto;
     }
+
+    public boolean updateAlquiler(Integer alquilerID, AlquilerDTO alquilerDTO) {
+        Optional<Alquiler> alquilerOptional = alquilerRepository.findById(alquilerID);
+        if (alquilerOptional.isPresent()) {
+            Alquiler alquiler = alquilerOptional.get();
+            alquiler.setFecha_inicio(LocalDate.parse(alquilerDTO.getFecha_inicio()));
+            alquiler.setFecha_fin(LocalDate.parse(alquilerDTO.getFecha_fin()));
+            alquiler.setMaterial(materialRepository.findById(alquilerDTO.getMaterialID()).orElse(null));
+            alquiler.setPrecio(alquilerDTO.getPrecio());
+            alquilerRepository.save(alquiler);
+            return true;
+        }
+        return false;
+    }
+
 }
