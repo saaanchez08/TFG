@@ -55,6 +55,7 @@
     </div>
     
     <p v-else-if="busquedaRealizada" class="no-results">No se encontraron resultados con los filtros proporcionados.</p>
+
     <!-- Formulario para insertar -->
     <form v-if="mostrarFormularioInsertar" @submit.prevent="insertarMaterial">
       <div>
@@ -426,21 +427,5 @@ p {
   color: red;
   margin-top: 20px;
 }
-.footer {
-  width: 100%;
-  padding: 10px 20px;
-  position: fixed;
-  bottom: 0;
-}
 
-.footer-content {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.footer-content h3 {
-  font-weight: bold;
-  font-size: 40px;
-  font-family: sans-serif;
-}
 </style>

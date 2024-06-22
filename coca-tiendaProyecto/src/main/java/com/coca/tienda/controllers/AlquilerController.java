@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coca.tienda.dtos.AlquilerDTO;
-import com.coca.tienda.dtos.CategoriaDTO;
 import com.coca.tienda.entities.Alquiler;
 import com.coca.tienda.negocio.impl.AlquilerService;
 
@@ -40,6 +39,7 @@ public class AlquilerController {
             return ResponseEntity.status(500).body(null);
         }
     }
+    
     @DeleteMapping("/{materialID}")
     public ResponseEntity<String> deleteCategoria(@PathVariable int materialID) {
         boolean deleted = alquilerService.deleteAlquiler(materialID);
@@ -50,8 +50,6 @@ public class AlquilerController {
         }
     }
     
-   
-    
     @GetMapping
     public List<AlquilerDTO> getFilteredAlquiler(
             @RequestParam(required = false) Integer alquilerID,
@@ -61,6 +59,7 @@ public class AlquilerController {
             @RequestParam(required = false) Double precio) {
         return alquilerService.getFilteredAlquiler(alquilerID, fecha_inicio, fecha_fin, materialID, precio);
     }
+    
     @PutMapping("/{alquilerID}")
     public ResponseEntity<String> updateAlquiler(@PathVariable Integer alquilerID, @RequestBody AlquilerDTO alquilerDTO) {
         boolean updated = alquilerService.updateAlquiler(alquilerID, alquilerDTO);
@@ -70,5 +69,4 @@ public class AlquilerController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Alquiler no encontrado");
         }
     }
-
 }

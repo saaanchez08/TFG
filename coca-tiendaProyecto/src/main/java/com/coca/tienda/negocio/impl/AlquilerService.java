@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,13 +35,13 @@ public class AlquilerService {
     }
     
     public boolean deleteAlquiler(int materialID) {
-    	Optional<Alquiler> alquilerOptional = alquilerRepository.findById(materialID);
-		 if (alquilerOptional.isPresent()) {
-			 alquilerRepository.delete(alquilerOptional.get());
-	            return true;
-	        }
-	        return false;
-	    }
+        Optional<Alquiler> alquilerOptional = alquilerRepository.findById(materialID);
+        if (alquilerOptional.isPresent()) {
+            alquilerRepository.delete(alquilerOptional.get());
+            return true;
+        }
+        return false;
+    }
 
     public List<AlquilerDTO> getFilteredAlquiler(Integer alquilerID, String fecha_inicio, String fecha_fin, Integer materialID, Double precio) {
         return alquilerRepository.findAll().stream()
@@ -50,7 +49,7 @@ public class AlquilerService {
                 .filter(alquiler -> fecha_inicio == null || alquiler.getFecha_inicio().toString().equals(fecha_inicio))
                 .filter(alquiler -> fecha_fin == null || alquiler.getFecha_fin().toString().equals(fecha_fin))
                 .filter(alquiler -> materialID == null || alquiler.getMaterial().getMaterialID().equals(materialID))
-                .filter(alquiler -> precio == null || alquiler.getPrecio() == precio)
+                .filter(alquiler -> precio == null || alquiler.getPrecio()==(precio))
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
@@ -78,5 +77,4 @@ public class AlquilerService {
         }
         return false;
     }
-
 }
