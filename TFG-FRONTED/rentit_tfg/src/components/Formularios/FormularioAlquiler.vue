@@ -154,144 +154,147 @@ export default {
     };
   },
   methods: {
-    mostrarFormularioInsercion() {
-      this.mostrarFormularioInsertar = true;
-    },
-    async insertarAlquiler() {
-      try {
-        await axios.post('http://localhost:8081/tienda/alquiler/realizar', {
-          fecha_inicio: this.nuevoAlquiler.fecha_inicio,
-          fecha_fin: this.nuevoAlquiler.fecha_fin,
-          material: {
-            materialID: this.nuevoAlquiler.materialID
-          },
-          precio: this.nuevoAlquiler.precio
-        });
-        alert('Alquiler insertado correctamente');
-        this.resumenAlquiler = { ...this.nuevoAlquiler };
-        this.alquilerRealizado = true;
-        this.nuevoAlquiler = {
-          fecha_inicio: '',
-          fecha_fin: '',
-          materialID: '',
-          precio: ''
-        };
-        this.mostrarFormularioInsertar = false;
-        this.buscarAlquiler();
-      } catch (error) {
-        console.error('Error al insertar alquiler:', error);
-        alert('Error al insertar el alquiler');
-      }
-    },
-    buscarAlquiler() {
-      const url = new URL('http://localhost:8081/tienda/alquiler');
-      const params = new URLSearchParams();
-
-      if (this.alquilerID) params.append('alquilerID', this.alquilerID);
-      if (this.fechaInicio) params.append('fecha_inicio', this.fechaInicio);
-      if (this.fechaFin) params.append('fecha_fin', this.fechaFin);
-      if (this.materialID) params.append('materialID', this.materialID);
-      if (this.precio) params.append('precio', this.precio);
-
-      fetch(`${url}?${params.toString()}`)
-        .then(response => response.json())
-        .then(data => {
-          this.resultados = data;
-          this.hasSearched = true;
-        })
-        .catch(error => {
-          console.error('Error al obtener los datos:', error);
-          this.hasSearched = true;
-        });
-    },
-    async eliminarAlquiler(id) {
-      if (confirm('¿Estás seguro de que deseas eliminar este Alquiler?')) {
-        try {
-          await axios.delete(`http://localhost:8081/tienda/alquiler/${id}`);
-          this.resultados = this.resultados.filter((alquiler) => alquiler.alquilerID !== id);
-          alert('Alquiler eliminado correctamente');
-        } catch (error) {
-          console.error('Error al eliminar alquiler:', error);
-          alert('Error al eliminar el alquiler');
-        }
-      }
-    },
-    mostrarFormularioEditar(alquiler) {
-      this.alquilerAEditar = { ...alquiler };
-    },
-    async editarAlquiler() {
-      try {
-        await axios.put(`http://localhost:8081/tienda/alquiler/${this.alquilerAEditar.alquilerID}`, {
-          fecha_inicio: this.alquilerAEditar.fecha_inicio,
-          fecha_fin: this.alquilerAEditar.fecha_fin,
-          materialID: this.alquilerAEditar.materialID,
-          precio: this.alquilerAEditar.precio
-        });
-        alert('Alquiler actualizado correctamente');
-        this.alquilerAEditar = null;
-        this.buscarAlquiler();
-      } catch (error) {
-        console.error('Error al actualizar alquiler:', error);
-        alert('Error al actualizar el alquiler');
-      }
-    },
-    async fetchMateriales() {
-      try {
-        const response = await axios.get('http://localhost:8081/tienda/material');
-        this.materiales = response.data;
-      } catch (error) {
-        console.error('Error al obtener la lista de materiales:', error);
-        alert('Error al cargar la lista de materiales');
-      }
-    },
-    calculatePrecioTotal(tipo) {
-      let fechaInicio, fechaFin, materialID;
-      if (tipo === 'nuevo') {
-        fechaInicio = this.nuevoAlquiler.fecha_inicio;
-        fechaFin = this.nuevoAlquiler.fecha_fin;
-        materialID = this.nuevoAlquiler.materialID;
-      } else if (tipo === 'editar') {
-        fechaInicio = this.alquilerAEditar.fecha_inicio;
-        fechaFin = this.alquilerAEditar.fecha_fin;
-        materialID = this.alquilerAEditar.materialID;
-      }
-
-      if (fechaInicio && fechaFin && materialID) {
-        const start = new Date(fechaInicio);
-        const end = new Date(fechaFin);
-        const diffTime = Math.abs(end - start);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-        const material = this.materiales.find(m => m.materialID === parseInt(materialID));
-
-        if (material) {
-          if (tipo === 'nuevo') {
-            this.nuevoAlquiler.precio = (material.precio * diffDays).toFixed(2);
-          } else if (tipo === 'editar') {
-            this.alquilerAEditar.precio = (material.precio * diffDays).toFixed(2);
-          }
-        }
-      }
-    },
-    getMaterialNombre(materialID) {
-      const material = this.materiales.find(m => m.materialID === parseInt(materialID));
-      return material ? material.nombre : '';
-    },
-    generarPDF() {
-      const doc = new jsPDF();
-      doc.text('Resumen del Alquiler', 10, 10);
-      doc.text(`Fecha de Inicio: ${this.resumenAlquiler.fecha_inicio}`, 10, 20);
-      doc.text(`Fecha de Fin: ${this.resumenAlquiler.fecha_fin}`, 10, 30);
-      doc.text(`Material: ${this.getMaterialNombre(this.resumenAlquiler.materialID)}`, 10, 40);
-      doc.text(`Precio Total: ${this.resumenAlquiler.precio}`, 10, 50);
-
-      doc.text('Gracias por alquilar con Rent.it', 10, 70);
-      doc.save('resumen_alquiler.pdf');
+  mostrarFormularioInsercion() {
+    this.mostrarFormularioInsertar = true;
+  },
+  async insertarAlquiler() {
+    try {
+      await axios.post('http://localhost:8081/tienda/alquiler/realizar', {
+        fecha_inicio: this.nuevoAlquiler.fecha_inicio,
+        fecha_fin: this.nuevoAlquiler.fecha_fin,
+        material: {
+          materialID: this.nuevoAlquiler.materialID
+        },
+        precio: this.nuevoAlquiler.precio
+      });
+      alert('Alquiler insertado correctamente');
+      this.resumenAlquiler = { ...this.nuevoAlquiler };
+      this.alquilerRealizado = true;
+      this.nuevoAlquiler = {
+        fecha_inicio: '',
+        fecha_fin: '',
+        materialID: '',
+        precio: ''
+      };
+      this.mostrarFormularioInsertar = false;
+      this.buscarAlquiler();
+    } catch (error) {
+      console.error('Error al insertar alquiler:', error);
+      alert('Error al insertar el alquiler');
     }
   },
-  mounted() {
-    this.fetchMateriales();
+  buscarAlquiler() {
+    const url = new URL('http://localhost:8081/tienda/alquiler');
+    const params = new URLSearchParams();
+
+    if (this.alquilerID) params.append('alquilerID', this.alquilerID);
+    if (this.fechaInicio) params.append('fecha_inicio', this.fechaInicio);
+    if (this.fechaFin) params.append('fecha_fin', this.fechaFin);
+    if (this.materialID) params.append('materialID', this.materialID);
+    if (this.precio) params.append('precio', this.precio);
+
+    fetch(`${url}?${params.toString()}`)
+      .then(response => response.json())
+      .then(data => {
+        this.resultados = data;
+        this.hasSearched = true;
+      })
+      .catch(error => {
+        console.error('Error al obtener los datos:', error);
+        this.hasSearched = true;
+      });
   },
+  async eliminarAlquiler(id) {
+    if (confirm('¿Estás seguro de que deseas eliminar este Alquiler?')) {
+      try {
+        await axios.delete(`http://localhost:8081/tienda/alquiler/${id}`);
+        this.resultados = this.resultados.filter((alquiler) => alquiler.alquilerID !== id);
+        alert('Alquiler eliminado correctamente');
+      } catch (error) {
+        console.error('Error al eliminar alquiler:', error);
+        alert('Error al eliminar el alquiler');
+      }
+    }
+  },
+  mostrarFormularioEditar(alquiler) {
+    this.alquilerAEditar = { ...alquiler };
+  },
+  async editarAlquiler() {
+    alert('Si quieres cambiar el material, debes volver a seleccionar fechas');
+    try {
+      await axios.put(`http://localhost:8081/tienda/alquiler/${this.alquilerAEditar.alquilerID}`, {
+        fecha_inicio: this.alquilerAEditar.fecha_inicio,
+        fecha_fin: this.alquilerAEditar.fecha_fin,
+        materialID: this.alquilerAEditar.materialID,
+        precio: this.alquilerAEditar.precio
+      });
+      alert('Alquiler actualizado correctamente');
+      this.generarPDF(this.alquilerAEditar); 
+      this.alquilerAEditar = null;
+      this.buscarAlquiler();
+    } catch (error) {
+      console.error('Error al actualizar alquiler:', error);
+      alert('Error al actualizar el alquiler');
+    }
+  },
+  async fetchMateriales() {
+    try {
+      const response = await axios.get('http://localhost:8081/tienda/material');
+      this.materiales = response.data;
+    } catch (error) {
+      console.error('Error al obtener la lista de materiales:', error);
+      alert('Error al cargar la lista de materiales');
+    }
+  },
+  calculatePrecioTotal(tipo) {
+    let fechaInicio, fechaFin, materialID;
+    if (tipo === 'nuevo') {
+      fechaInicio = this.nuevoAlquiler.fecha_inicio;
+      fechaFin = this.nuevoAlquiler.fecha_fin;
+      materialID = this.nuevoAlquiler.materialID;
+    } else if (tipo === 'editar') {
+      fechaInicio = this.alquilerAEditar.fecha_inicio;
+      fechaFin = this.alquilerAEditar.fecha_fin;
+      materialID = this.alquilerAEditar.materialID;
+    }
+
+    if (fechaInicio && fechaFin && materialID) {
+      const start = new Date(fechaInicio);
+      const end = new Date(fechaFin);
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      const material = this.materiales.find(m => m.materialID === parseInt(materialID));
+
+      if (material) {
+        if (tipo === 'nuevo') {
+          this.nuevoAlquiler.precio = (material.precio * diffDays).toFixed(2);
+        } else if (tipo === 'editar') {
+          this.alquilerAEditar.precio = (material.precio * diffDays).toFixed(2);
+        }
+      }
+    }
+  },
+  getMaterialNombre(materialID) {
+    const material = this.materiales.find(m => m.materialID === parseInt(materialID));
+    return material ? material.nombre : '';
+  },
+  generarPDF(alquiler) {
+    const doc = new jsPDF();
+    doc.text('Resumen del Alquiler', 10, 10);
+    doc.text(`Fecha de Inicio: ${alquiler.fecha_inicio}`, 10, 20);
+    doc.text(`Fecha de Fin: ${alquiler.fecha_fin}`, 10, 30);
+    doc.text(`Material: ${this.getMaterialNombre(alquiler.materialID)}`, 10, 40);
+    doc.text(`Precio Total: ${alquiler.precio}`, 10, 50);
+
+    doc.text('Gracias por alquilar con Rent.it', 10, 70);
+    doc.save(`alquiler_${alquiler.alquilerID}.pdf`);
+  }
+},
+mounted() {
+  this.fetchMateriales();
+},
+
 };
 </script>
 
