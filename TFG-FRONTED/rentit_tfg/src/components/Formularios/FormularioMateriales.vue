@@ -161,7 +161,7 @@ export default {
           categoriaID: ''
         };
         this.mostrarFormularioInsertar = false;
-        this.buscarMaterial(); // Actualizar la lista después de insertar
+        this.buscarMaterial(); 
       } catch (error) {
         console.error('Error al insertar material:', error);
         alert('Error al insertar el material');
@@ -208,7 +208,7 @@ export default {
         await axios.put(`http://localhost:8081/tienda/material/${this.materialAEditar.materialID}`, this.materialAEditar);
         alert('Material modificado correctamente');
         this.materialAEditar = null;
-        this.buscarMaterial(); // Actualizar la lista después de modificar
+        this.buscarMaterial(); 
       } catch (error) {
         console.error('Error al modificar el material:', error);
         alert('Error al modificar el material');
