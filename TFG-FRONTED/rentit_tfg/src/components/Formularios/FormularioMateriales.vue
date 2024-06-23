@@ -1,36 +1,98 @@
 <template>
   <div id="app">
-    <h1>Formulario de Materiales</h1>
-    <form @submit.prevent="buscarMaterial">
-      <div>
-        <label for="materialID">Material ID:</label>
-        <input type="number" v-model="form.materialID" placeholder="Buscar por ID" />
+    <div>
+      <form @submit.prevent="buscarMaterial">
+        <h1>Busqueda de Materiales</h1>
+        <div>
+          <label for="materialID">Material ID:</label>
+          <input type="number" v-model="form.materialID" placeholder="Buscar por ID" />
+        </div>
+        <div>
+          <label for="nombre">Nombre:</label>
+          <input type="text" v-model="form.nombre" placeholder="Buscar por nombre" />
+        </div>
+        <div>
+          <label for="descripcion">Descripción:</label>
+          <input type="text" v-model="form.descripcion" placeholder="Buscar por descripción" />
+        </div>
+        <div>
+          <label for="precio">Precio:</label>
+          <input type="number" v-model="form.precio" placeholder="Buscar por precio" />
+        </div>
+        <div>
+          <label for="estado">Estado:</label>
+          <select v-model="form.estado" required>
+            <option value="Disponible">Disponible</option>
+            <option value="No Disponible">No Disponible</option>
+          </select>
+        </div>
+        <div>
+          <label for="categoriaID">Categoría ID:</label>
+          <input type="number" v-model="form.categoriaID" placeholder="Buscar por CategoriaID" />
+        </div>
+        <button type="submit" class="buscar-button"><span></span>Buscar</button>
+      </form>
+
+      <!-- Formulario para insertar -->
+      <form v-if="mostrarFormularioInsertar" @submit.prevent="insertarMaterial">
+        <h1>Insercion de Materiales</h1>
+        <div>
+          <label for="nombreNuevo">Nombre:</label>
+          <input type="text" v-model="nuevoMaterial.nombre" required />
+        </div>
+        <div>
+          <label for="descripcionNuevo">Descripción:</label>
+          <input type="text" v-model="nuevoMaterial.descripcion" />
+        </div>
+        <div>
+          <label for="precioNuevo">Precio:</label>
+          <input type="number" v-model.number="nuevoMaterial.precio" />
+        </div>
+        <div>
+          <label for="estadoNuevo">Estado:</label>
+          <select v-model="nuevoMaterial.estado" required>
+            <option value="Disponible">Disponible</option>
+            <option value="No Disponible">No Disponible</option>
+          </select>
+        </div>
+        <div>
+          <label for="categoriaIDNuevo">Categoría ID:</label>
+          <input type="number" v-model.number="nuevoMaterial.categoriaID" />
+        </div>
+        <button type="submit" class="insertar-button"><span></span>Insertar</button>
+      </form>
+
+      <!-- Formulario para modificación -->
+      <div v-if="materialAEditar">    
+        <form @submit.prevent="editarMaterial">
+          <h2>Editar Material</h2>
+          <div>
+            <label for="nombreEditar">Nombre:</label>
+            <input type="text" v-model="materialAEditar.nombre" required />
+          </div>
+          <div>
+            <label for="descripcionEditar">Descripción:</label>
+            <input type="text" v-model="materialAEditar.descripcion" required />
+          </div>
+          <div>
+            <label for="precioEditar">Precio:</label>
+            <input type="number" v-model="materialAEditar.precio" required />
+          </div>
+          <div>
+            <label for="estadoEditar">Estado:</label>
+            <select v-model="materialAEditar.estado" required>
+              <option value="Disponible">Disponible</option>
+              <option value="No Disponible">No Disponible</option>
+            </select>
+          </div>
+          <div>
+            <label for="categoriaIDEditar">Categoría ID:</label>
+            <input type="number" v-model="materialAEditar.categoriaID" required />
+          </div>
+          <button type="submit" class="guardar-button"><span></span>Guardar Cambios</button>
+        </form>
       </div>
-      <div>
-        <label for="nombre">Nombre:</label>
-        <input type="text" v-model="form.nombre" placeholder="Buscar por nombre" />
-      </div>
-      <div>
-        <label for="descripcion">Descripción:</label>
-        <input type="text" v-model="form.descripcion" placeholder="Buscar por descripción" />
-      </div>
-      <div>
-        <label for="precio">Precio:</label>
-        <input type="number" v-model="form.precio" placeholder="Buscar por precio" />
-      </div>
-      <div>
-        <label for="estado">Estado:</label>
-        <select v-model="form.estado" required>
-          <option value="Disponible">Disponible</option>
-          <option value="No Disponible">No Disponible</option>
-        </select>
-      </div>
-      <div>
-        <label for="categoriaID">Categoría ID:</label>
-        <input type="number" v-model="form.categoriaID" placeholder="Buscar por CategoriaID" />
-      </div>
-      <button type="submit" class="buscar-button"><span></span>Buscar</button>
-    </form>
+    </div>
 
     <div class="boton-insert">
       <button @click="mostrarFormularioInsercion" class="insertar-button">Insertar Material</button>
@@ -55,65 +117,6 @@
     </div>
     
     <p v-else-if="busquedaRealizada" class="no-results">No se encontraron resultados con los filtros proporcionados.</p>
-
-    <!-- Formulario para insertar -->
-    <form v-if="mostrarFormularioInsertar" @submit.prevent="insertarMaterial">
-      <div>
-        <label for="nombreNuevo">Nombre:</label>
-        <input type="text" v-model="nuevoMaterial.nombre" required />
-      </div>
-      <div>
-        <label for="descripcionNuevo">Descripción:</label>
-        <input type="text" v-model="nuevoMaterial.descripcion" />
-      </div>
-      <div>
-        <label for="precioNuevo">Precio:</label>
-        <input type="number" v-model.number="nuevoMaterial.precio" />
-      </div>
-      <div>
-        <label for="estadoNuevo">Estado:</label>
-        <select v-model="nuevoMaterial.estado" required>
-          <option value="Disponible">Disponible</option>
-          <option value="No Disponible">No Disponible</option>
-        </select>
-      </div>
-      <div>
-        <label for="categoriaIDNuevo">Categoría ID:</label>
-        <input type="number" v-model.number="nuevoMaterial.categoriaID" />
-      </div>
-      <button type="submit" class="insertar-button"><span></span>Insertar</button>
-    </form>
-
-    <!-- Formulario para modificación -->
-    <div v-if="materialAEditar">
-      <h2>Editar Material</h2>
-      <form @submit.prevent="editarMaterial">
-        <div>
-          <label for="nombreEditar">Nombre:</label>
-          <input type="text" v-model="materialAEditar.nombre" required />
-        </div>
-        <div>
-          <label for="descripcionEditar">Descripción:</label>
-          <input type="text" v-model="materialAEditar.descripcion" required />
-        </div>
-        <div>
-          <label for="precioEditar">Precio:</label>
-          <input type="number" v-model="materialAEditar.precio" required />
-        </div>
-        <div>
-          <label for="estadoEditar">Estado:</label>
-          <select v-model="materialAEditar.estado" required>
-            <option value="Disponible">Disponible</option>
-            <option value="No Disponible">No Disponible</option>
-          </select>
-        </div>
-        <div>
-          <label for="categoriaIDEditar">Categoría ID:</label>
-          <input type="number" v-model="materialAEditar.categoriaID" required />
-        </div>
-        <button type="submit" class="guardar-button"><span></span>Guardar Cambios</button>
-      </form>
-    </div>
   </div>
 </template>
 

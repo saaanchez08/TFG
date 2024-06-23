@@ -1,22 +1,53 @@
 <template>
   <div id="app">
-    <h2>Búsqueda de Categorías</h2>
-    <form @submit.prevent="buscarCategoria">
-      <div>
-        <label for="categoriaID">ID Categoría:</label>
-        <input type="number" id="categoriaID" v-model="form.categoriaID" placeholder="Buscar por ID">
-      </div>
-      <div>
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" v-model="form.nombre" placeholder="Buscar por nombre">
-      </div>
-      <div>
-        <label for="descripcion">Descripción:</label>
-        <input type="text" id="descripcion" v-model="form.descripcion" placeholder="Buscar por descripción">
-      </div>
-      <button type="submit" class="buscar-button"><span></span>Buscar</button>
-    </form>
+    <div>
+      <form @submit.prevent="buscarCategoria">
+        <h2>Búsqueda de Categorías</h2>
+        <div>
+          <label for="categoriaID">ID Categoría:</label>
+          <input type="number" id="categoriaID" v-model="form.categoriaID" placeholder="Buscar por ID">
+        </div>
+        <div>
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" v-model="form.nombre" placeholder="Buscar por nombre">
+        </div>
+        <div>
+          <label for="descripcion">Descripción:</label>
+          <input type="text" id="descripcion" v-model="form.descripcion" placeholder="Buscar por descripción">
+        </div>
+        <button type="submit" class="buscar-button"><span></span>Buscar</button>
+      </form>
 
+      <!-- Formulario para insertar -->
+      <form v-if="mostrarFormularioInsertar" @submit.prevent="insertarCategoria">
+        <h2>Insertar Categoria</h2>
+        <div>
+          <label for="nombreNuevo">Nombre:</label>
+          <input type="text" v-model="nuevoCategoria.nombre" required />
+        </div>
+        <div>
+          <label for="descripcionNuevo">Descripción:</label>
+          <input type="text" v-model="nuevoCategoria.descripcion" />
+        </div>
+        <button type="submit" class="insertar-button"><span></span>Insertar</button>
+      </form>
+
+      <!-- Formulario para modificación -->
+      <div v-if="categoriaAEditar">      
+        <form @submit.prevent="editarCategoria">
+          <h2>Editar Categoria</h2>
+          <div>
+            <label for="nombreEditar">Nombre:</label>
+            <input type="text" v-model="categoriaAEditar.nombre" required />
+          </div>
+          <div>
+            <label for="descripcionEditar">Descripción:</label>
+            <input type="text" v-model="categoriaAEditar.descripcion" required />
+          </div>
+          <button type="submit" class="guardar-button"><span></span>Guardar Cambios</button>
+        </form>
+      </div>
+    </div>
     <div class="boton-insert">
       <button @click="mostrarFormularioInsercion" class="insertar-button">Insertar Categoria</button>
     </div>
@@ -37,35 +68,6 @@
       </div>
     </div>
     <p v-else-if="hasSearched" class="no-results">No se encontraron resultados.</p>
-
-    <!-- Formulario para insertar -->
-    <form v-if="mostrarFormularioInsertar" @submit.prevent="insertarCategoria">
-      <div>
-        <label for="nombreNuevo">Nombre:</label>
-        <input type="text" v-model="nuevoCategoria.nombre" required />
-      </div>
-      <div>
-        <label for="descripcionNuevo">Descripción:</label>
-        <input type="text" v-model="nuevoCategoria.descripcion" />
-      </div>
-      <button type="submit" class="insertar-button"><span></span>Insertar</button>
-    </form>
-
-    <!-- Formulario para modificación -->
-    <div v-if="categoriaAEditar">
-      <h2>Editar Categoria</h2>
-      <form @submit.prevent="editarCategoria">
-        <div>
-          <label for="nombreEditar">Nombre:</label>
-          <input type="text" v-model="categoriaAEditar.nombre" required />
-        </div>
-        <div>
-          <label for="descripcionEditar">Descripción:</label>
-          <input type="text" v-model="categoriaAEditar.descripcion" required />
-        </div>
-        <button type="submit" class="guardar-button"><span></span>Guardar Cambios</button>
-      </form>
-    </div>
   </div>
 </template>
 

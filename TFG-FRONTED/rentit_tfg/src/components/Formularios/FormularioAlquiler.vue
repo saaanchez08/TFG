@@ -1,35 +1,91 @@
 <template>
   <div id="app">
-    <h2>Búsqueda de Alquileres</h2>
-    <form @submit.prevent="buscarAlquiler">
-      <div>
-        <label for="alquilerID">ID Alquiler:</label>
-        <input type="number" id="alquilerID" v-model="alquilerID" placeholder="Buscar por ID">
+    <div class="flex">
+      <form @submit.prevent="buscarAlquiler">
+        <h2>Búsqueda de Alquileres</h2>
+        <div>
+          <label for="alquilerID">ID Alquiler:</label>
+          <input type="number" id="alquilerID" v-model="alquilerID" placeholder="Buscar por ID">
+        </div>
+        <div>
+          <label for="fechaInicio">Fecha de Inicio:</label>
+          <input type="date" id="fechaInicio" v-model="fechaInicio">
+        </div>
+        <div>
+          <label for="fechaFin">Fecha de Fin:</label>
+          <input type="date" id="fechaFin" v-model="fechaFin" :min="fechaInicio">
+        </div>
+        <div>
+          <label for="materialID">Material:</label>
+          <select id="materialID" v-model="materialID">
+            <option value="" disabled>Selecciona un material</option>
+            <option v-for="material in materiales" :key="material.materialID" :value="material.materialID">
+              {{ material.nombre }}
+            </option>
+          </select>
+        </div>
+        <div>
+          <label for="precio">Precio:</label>
+          <input type="number" id="precio" v-model="precio" step="0.01">
+        </div>
+        <button type="submit" class="buscar-button"><span></span>Buscar</button>
+      </form>
+        <!-- Formulario para insertar -->
+      <form v-if="mostrarFormularioInsertar" @submit.prevent="insertarAlquiler">
+        <h2>Insercion de Alquileres</h2>
+        <div>
+          <label for="materialIDNuevo">Material:</label>
+          <select id="materialIDNuevo" v-model="nuevoAlquiler.materialID" required>
+            <option value="" disabled>Selecciona un material</option>
+            <option v-for="material in materiales" :key="material.materialID" :value="material.materialID">
+              {{ material.nombre }}
+            </option>
+          </select>
+        </div>
+        <div>
+          <label for="fechaInicioNuevo">Fecha de Inicio:</label>
+          <input type="date" id="fechaInicioNuevo" v-model="nuevoAlquiler.fecha_inicio" required @change="calculatePrecioTotal('nuevo')">
+        </div>
+        <div>
+          <label for="fechaFinNuevo">Fecha de Fin:</label>
+          <input type="date" id="fechaFinNuevo" v-model="nuevoAlquiler.fecha_fin" required @change="calculatePrecioTotal('nuevo')" :min="nuevoAlquiler.fecha_inicio">
+        </div>
+        <div>
+          <label for="precioTotalNuevo">Precio Total:</label>
+          <input type="text" id="precioTotalNuevo" v-model="nuevoAlquiler.precio" readonly>
+        </div>
+        <button type="submit" class="insertar-button"><span></span>Insertar</button>
+      </form>
+        <!-- Formulario para modificación -->
+        <div v-if="alquilerAEditar">
+          <form @submit.prevent="editarAlquiler">
+            <h2>Modificacion de Alquileres</h2>
+            <div>
+              <label for="materialIDEditar">Material:</label>
+              <select id="materialIDEditar" v-model="alquilerAEditar.materialID" required>
+                <option value="" disabled>Selecciona un material</option>
+                <option v-for="material in materiales" :key="material.materialID" :value="material.materialID">
+                  {{ material.nombre }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <label for="fechaInicioEditar">Fecha de Inicio:</label>
+              <input type="date" id="fechaInicioEditar" v-model="alquilerAEditar.fecha_inicio" required>
+            </div>
+            <div>
+              <label for="fechaFinEditar">Fecha de Fin:</label>
+              <input type="date" id="fechaFinEditar" v-model="alquilerAEditar.fecha_fin" required @change="calculatePrecioTotal('editar')" :min="alquilerAEditar.fecha_inicio">
+            </div>
+            <div>
+              <label for="precioTotalEditar">Precio Total:</label>
+              <input type="text" id="precioTotalEditar" v-model="alquilerAEditar.precio" readonly>
+            </div>
+            <button type="submit" class="guardar-button"><span></span>Guardar Cambios</button>
+          </form>
+        </div>
       </div>
-      <div>
-        <label for="fechaInicio">Fecha de Inicio:</label>
-        <input type="date" id="fechaInicio" v-model="fechaInicio">
-      </div>
-      <div>
-        <label for="fechaFin">Fecha de Fin:</label>
-        <input type="date" id="fechaFin" v-model="fechaFin" :min="fechaInicio">
-      </div>
-      <div>
-        <label for="materialID">Material:</label>
-        <select id="materialID" v-model="materialID">
-          <option value="" disabled>Selecciona un material</option>
-          <option v-for="material in materiales" :key="material.materialID" :value="material.materialID">
-            {{ material.nombre }}
-          </option>
-        </select>
-      </div>
-      <div>
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" v-model="precio" step="0.01">
-      </div>
-      <button type="submit" class="buscar-button"><span></span>Buscar</button>
-    </form>
-
+    </div>
  
     <div class="boton-insert">
       <button @click="mostrarFormularioInsercion" class="insertar-button">Insertar Alquiler</button>
@@ -49,66 +105,10 @@
         <p>ID Alquiler: {{ alquiler.alquilerID }}</p>
         <p>Fecha de Inicio: {{ alquiler.fecha_inicio }}</p>
         <p>Fecha de Fin: {{ alquiler.fecha_fin }}</p>
-        <p>Precio: {{ alquiler.precio }}</p>
+        <p>Precio: {{ alquiler.precio }} /dia</p>
       </div>
     </div>
     <p v-else-if="hasSearched" class="no-results">No se encontraron resultados.</p>
-
-    <!-- Formulario para insertar -->
-    <form v-if="mostrarFormularioInsertar" @submit.prevent="insertarAlquiler">
-      <div>
-        <label for="materialIDNuevo">Material:</label>
-        <select id="materialIDNuevo" v-model="nuevoAlquiler.materialID" required>
-          <option value="" disabled>Selecciona un material</option>
-          <option v-for="material in materiales" :key="material.materialID" :value="material.materialID">
-            {{ material.nombre }}
-          </option>
-        </select>
-      </div>
-      <div>
-        <label for="fechaInicioNuevo">Fecha de Inicio:</label>
-        <input type="date" id="fechaInicioNuevo" v-model="nuevoAlquiler.fecha_inicio" required @change="calculatePrecioTotal('nuevo')">
-      </div>
-      <div>
-        <label for="fechaFinNuevo">Fecha de Fin:</label>
-        <input type="date" id="fechaFinNuevo" v-model="nuevoAlquiler.fecha_fin" required @change="calculatePrecioTotal('nuevo')" :min="nuevoAlquiler.fecha_inicio">
-      </div>
-      <div>
-        <label for="precioTotalNuevo">Precio Total:</label>
-        <input type="text" id="precioTotalNuevo" v-model="nuevoAlquiler.precio" readonly>
-      </div>
-      <button type="submit" class="insertar-button"><span></span>Insertar</button>
-    </form>
-
-    <!-- Formulario para modificación -->
-    <div v-if="alquilerAEditar">
-      <h2>Editar Alquiler</h2>
-      <form @submit.prevent="editarAlquiler">
-        <div>
-          <label for="materialIDEditar">Material:</label>
-          <select id="materialIDEditar" v-model="alquilerAEditar.materialID" required>
-            <option value="" disabled>Selecciona un material</option>
-            <option v-for="material in materiales" :key="material.materialID" :value="material.materialID">
-              {{ material.nombre }}
-            </option>
-          </select>
-        </div>
-        <div>
-          <label for="fechaInicioEditar">Fecha de Inicio:</label>
-          <input type="date" id="fechaInicioEditar" v-model="alquilerAEditar.fecha_inicio" required>
-        </div>
-        <div>
-          <label for="fechaFinEditar">Fecha de Fin:</label>
-          <input type="date" id="fechaFinEditar" v-model="alquilerAEditar.fecha_fin" required @change="calculatePrecioTotal('editar')" :min="alquilerAEditar.fecha_inicio">
-        </div>
-        <div>
-          <label for="precioTotalEditar">Precio Total:</label>
-          <input type="text" id="precioTotalEditar" v-model="alquilerAEditar.precio" readonly>
-        </div>
-        <button type="submit" class="guardar-button"><span></span>Guardar Cambios</button>
-      </form>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -303,6 +303,7 @@ form {
 div {
   margin-bottom: 15px;
 }
+
 .boton-insert{
 text-align: center;
 margin: 20px;
