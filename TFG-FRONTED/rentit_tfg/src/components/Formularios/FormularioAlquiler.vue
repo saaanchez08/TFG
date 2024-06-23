@@ -210,7 +210,7 @@ export default {
       }
     },
     mostrarFormularioEditar(alquiler) {
-      alert('Si quieres modificar el material que quieres, debes volver a seleccionar fechas');
+      alert('Si quieres modificar el material que quieres alquilar, debes borrar las fechas introduccidas y volverlas a poner');
 
       this.alquilerAEditar = { ...alquiler };
     },
